@@ -1,18 +1,19 @@
-import { useState } from "react";
-import api from "./../api/axiosConfig";
-
 interface Props {
-    names: any[];
+    nameObjects: any[];
 }
 
-function ListGroup(props: Props) {
+function ListGroup({ nameObjects } : Props) {
 
+  if (nameObjects === null || nameObjects.length === 0) {
+    return <>
+    <h2>No names could be found with this criteria.</h2></>;
+  }
   return (
     <>
-      <h1>List</h1>
+      <h1>{nameObjects.length} names were found:</h1>
       <ul className="list-group">
-        {props.names?.map((name) => (
-          <li key={name.name}>{JSON.stringify(name)}</li>
+        {nameObjects?.map((nameObject, index) => (
+          <li key={index}>{nameObject.name}</li>
         ))}
       </ul>
     </>
