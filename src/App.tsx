@@ -55,22 +55,23 @@ function App() {
 
   return (
     <>
-    <div className="center">
+    <div className="background">
+      <div className="m-0 border-0 bd-example m-0 border-0">
       <h1 className="display-1">NameNest</h1>
-      <InputField name="Starts With:" fieldValue={startsWith} setValue={setStartsWith}></InputField>
-      <InputField name="Ends With:" fieldValue={endsWith} setValue={setEndsWith}></InputField>
-      <InputField name="Contains:" fieldValue={contains} setValue={setContains}></InputField>
-      <br></br>
+      <InputField name="Starts With" fieldValue={startsWith} setValue={setStartsWith}></InputField><br></br>
+      <InputField name="Ends With" fieldValue={endsWith} setValue={setEndsWith}></InputField><br></br>
+      <InputField name="Contains" fieldValue={contains} setValue={setContains}></InputField><br></br>
       <GenderDropdown gender={gender} setValue={setGender}></GenderDropdown>
       <UnisexCheckbox gender={gender} isUnisex={isUnisex} setValue={setIsUnisex}></UnisexCheckbox>
       <br></br>
-      {/* <CountryDropdown></CountryDropdown>
-      <br></br> */}
+      <CountryDropdown></CountryDropdown>
+      <br></br>
       <Button onClick={() => getNames()}>Find Names</Button>
       <br></br>
       <br></br>
       <ListGroup nameObjects={nameObjects}/>
       <br></br>
+      </div>
     </div>
     </>
   );

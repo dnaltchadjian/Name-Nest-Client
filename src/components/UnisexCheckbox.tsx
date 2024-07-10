@@ -10,7 +10,7 @@ const UnisexCheckbox = ({ gender, isUnisex, setValue }: Props) => {
   }
   return (
     <>
-      <label>Include unisex names: </label>
+      <label className="labelSpaced">Include unisex names: </label>
       <input
         className="unisexCheckbox"
         type="checkbox"
