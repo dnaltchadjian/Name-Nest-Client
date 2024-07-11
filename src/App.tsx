@@ -58,7 +58,7 @@ function App() {
     <div className="background">
       <Grid templateAreas={{
         base: `"main"`,
-        lg: `"aside main"`
+        lg: `"aside main aside2"`
       }}>
         <Show above="lg">
           <GridItem area="aside"></GridItem>
@@ -66,6 +66,7 @@ function App() {
         <GridItem area="main">
           <div className="m-0 border-0 bd-example m-0 border-0">
           <h1 className="display-1">NameNest</h1>
+          <h6>The perfect name for your baby waits here!</h6>
           <InputField name="Starts With" fieldValue={startsWith} setValue={setStartsWith}></InputField><br></br>
           <InputField name="Ends With" fieldValue={endsWith} setValue={setEndsWith}></InputField><br></br>
           <InputField name="Contains" fieldValue={contains} setValue={setContains}></InputField><br></br>
@@ -81,6 +82,9 @@ function App() {
           <br></br>
           </div>
         </GridItem>
+        <Show above="lg">
+          <GridItem area="aside2"></GridItem>
+        </Show>
       </Grid>
     </div>
     </>

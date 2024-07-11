@@ -10,12 +10,6 @@ html, body {
     text-align: center;
 }
 
-.center {
-    text-align: inherit;
-    width: 60%;
-    display: inline;
-}
-
 .unisexCheckbox {
     padding: 10px;
 }
