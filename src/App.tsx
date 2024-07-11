@@ -2,9 +2,10 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
 import './App.css';
 import api from './api/axiosConfig';
+import { useState } from 'react';
+import { Grid, GridItem, Show } from '@chakra-ui/react'
 import Button from "./components/Button";
 import InputField from './components/InputField';
-import { useState } from 'react';
 import ListGroup from './components/ListGroup';
 import GenderDropdown from './components/GenderDropdown';
 import UnisexCheckbox from './components/UnisexCheckbox';
@@ -12,8 +13,7 @@ import CountryDropdown from './components/CountryDropdown';
 
 function App() {
 
-
-  const [nameObjects, setNameObjects] = useState<any[]>([]);
+  const [nameObjects, setNameObjects] = useState<FirstName[]>([]);
 
   const [startsWith, setStartsWith] = useState("");
   const [endsWith, setEndsWith] = useState("");
@@ -44,7 +44,7 @@ function App() {
         }
       }
       console.log("url= " + url);
-      const response = await api.get(url);
+      const response = await api.get<FirstName[]>(url);
       console.log(response.data);
       setNameObjects(response.data);
     } catch (err) {
@@ -56,22 +56,32 @@ function App() {
   return (
     <>
     <div className="background">
-      <div className="m-0 border-0 bd-example m-0 border-0">
-      <h1 className="display-1">NameNest</h1>
-      <InputField name="Starts With" fieldValue={startsWith} setValue={setStartsWith}></InputField><br></br>
-      <InputField name="Ends With" fieldValue={endsWith} setValue={setEndsWith}></InputField><br></br>
-      <InputField name="Contains" fieldValue={contains} setValue={setContains}></InputField><br></br>
-      <GenderDropdown gender={gender} setValue={setGender}></GenderDropdown>
-      <UnisexCheckbox gender={gender} isUnisex={isUnisex} setValue={setIsUnisex}></UnisexCheckbox>
-      <br></br>
-      <CountryDropdown></CountryDropdown>
-      <br></br>
-      <Button onClick={() => getNames()}>Find Names</Button>
-      <br></br>
-      <br></br>
-      <ListGroup nameObjects={nameObjects}/>
-      <br></br>
-      </div>
+      <Grid templateAreas={{
+        base: `"main"`,
+        lg: `"aside main"`
+      }}>
+        <Show above="lg">
+          <GridItem area="aside"></GridItem>
+        </Show>
+        <GridItem area="main">
+          <div className="m-0 border-0 bd-example m-0 border-0">
+          <h1 className="display-1">NameNest</h1>
+          <InputField name="Starts With" fieldValue={startsWith} setValue={setStartsWith}></InputField><br></br>
+          <InputField name="Ends With" fieldValue={endsWith} setValue={setEndsWith}></InputField><br></br>
+          <InputField name="Contains" fieldValue={contains} setValue={setContains}></InputField><br></br>
+          <GenderDropdown gender={gender} setValue={setGender}></GenderDropdown>
+          <UnisexCheckbox gender={gender} isUnisex={isUnisex} setValue={setIsUnisex}></UnisexCheckbox>
+          <br></br>
+          <CountryDropdown></CountryDropdown>
+          <br></br>
+          <Button onClick={() => getNames()}>Find Names</Button>
+          <br></br>
+          <br></br>
+          <ListGroup nameObjects={nameObjects}/>
+          <br></br>
+          </div>
+        </GridItem>
+      </Grid>
     </div>
     </>
   );

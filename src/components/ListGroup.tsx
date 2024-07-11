@@ -1,5 +1,5 @@
 interface Props {
-    nameObjects: any[];
+    nameObjects: FirstName[];
 }
 
 function ListGroup({ nameObjects } : Props) {
