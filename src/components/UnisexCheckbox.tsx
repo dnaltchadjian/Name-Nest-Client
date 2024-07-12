@@ -1,3 +1,5 @@
+import { Checkbox } from "@chakra-ui/react";
+
 interface Props {
   gender: string;
   isUnisex: boolean;
@@ -10,15 +12,9 @@ const UnisexCheckbox = ({ gender, isUnisex, setValue }: Props) => {
   }
   return (
     <>
-      <label className="labelSpaced">Include unisex names: </label>
-      <input
-        className="unisexCheckbox"
-        type="checkbox"
-        id="unisexCheckbox"
-        checked={isUnisex}
-        onChange={(e) => setValue(!isUnisex)}
-      />
-      <br></br>
+    <Checkbox
+    isChecked={isUnisex}
+    onChange={(e) => setValue(!isUnisex)}>Include unisex names</Checkbox>
     </>
   );
 };

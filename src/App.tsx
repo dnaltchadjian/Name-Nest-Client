@@ -3,13 +3,13 @@ import 'bootstrap/dist/js/bootstrap.min.js';
 import './App.css';
 import api from './api/axiosConfig';
 import { useState } from 'react';
-import { Grid, GridItem, Show } from '@chakra-ui/react'
+import { Divider, Grid, GridItem, Show, Stack } from '@chakra-ui/react'
 import Button from "./components/Button";
 import InputField from './components/InputField';
 import ListGroup from './components/ListGroup';
-import GenderDropdown from './components/GenderDropdown';
 import UnisexCheckbox from './components/UnisexCheckbox';
 import CountryDropdown from './components/CountryDropdown';
+import GenderDropdown from './components/GenderDropdown';
 
 function App() {
 
@@ -20,6 +20,8 @@ function App() {
   const [contains, setContains] = useState("");
   const [gender, setGender] = useState("All");
   const [isUnisex, setIsUnisex] = useState(false);
+  const [countries, setCountries] = useState("");
+
 
   const getNames = async () => {
     try {
@@ -44,6 +46,7 @@ function App() {
         }
       }
       console.log("url= " + url);
+      console.log("countries= " + countries);
       const response = await api.get<FirstName[]>(url);
       console.log(response.data);
       setNameObjects(response.data);
@@ -52,6 +55,10 @@ function App() {
     }
   };
 
+
+  function makeAnimated(): Partial<import("react-select/dist/declarations/src/components").SelectComponents<{ value: string; label: string; }, false, import("react-select").GroupBase<{ value: string; label: string; }>>> | undefined {
+    throw new Error('Function not implemented.');
+  }
 
   return (
     <>
@@ -67,13 +74,25 @@ function App() {
           <div className="m-0 border-0 bd-example m-0 border-0">
           <h1 className="display-1">NameNest</h1>
           <h6>The perfect name for your baby waits here!</h6>
-          <InputField name="Starts With" fieldValue={startsWith} setValue={setStartsWith}></InputField><br></br>
-          <InputField name="Ends With" fieldValue={endsWith} setValue={setEndsWith}></InputField><br></br>
-          <InputField name="Contains" fieldValue={contains} setValue={setContains}></InputField><br></br>
-          <GenderDropdown gender={gender} setValue={setGender}></GenderDropdown>
-          <UnisexCheckbox gender={gender} isUnisex={isUnisex} setValue={setIsUnisex}></UnisexCheckbox>
-          <br></br>
-          <CountryDropdown></CountryDropdown>
+          <Stack spacing={4}>
+            <InputField name="Prefix" fieldValue={startsWith} setValue={setStartsWith}></InputField>
+            <InputField name="Suffix" fieldValue={endsWith} setValue={setEndsWith}></InputField>
+            <InputField name="Contains" fieldValue={contains} setValue={setContains}></InputField>
+          </Stack>
+          <Divider></Divider>
+          <Grid templateAreas={{
+            base: `"leftCol rightCol"`,
+            lg: `"leftCol rightCol"`
+            }}>
+            <GridItem area="leftCol">
+              <GenderDropdown setValue={setGender}></GenderDropdown>
+              <UnisexCheckbox gender={gender} isUnisex={isUnisex} setValue={setIsUnisex}></UnisexCheckbox>
+            </GridItem>
+            <GridItem area="rightCol">
+              <CountryDropdown setValue={setCountries}></CountryDropdown>
+            </GridItem>
+          </Grid>
+          
           <br></br>
           <Button onClick={() => getNames()}>Find Names</Button>
           <br></br>

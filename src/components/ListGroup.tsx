@@ -5,6 +5,12 @@ import {
   AccordionItem,
   AccordionPanel,
   Box,
+  Card,
+  CardBody,
+  Heading,
+  Stack,
+  StackDivider,
+  Text
 } from "@chakra-ui/react";
 
 interface Props {
@@ -19,9 +25,10 @@ function ListGroup({ nameObjects }: Props) {
       </>
     );
   }
+
   return (
     <>
-      <h3>{nameObjects.length} names were found:</h3>
+      <h5>{nameObjects.length} names were found:</h5>
       <Accordion defaultIndex={[]} allowMultiple>
         {nameObjects?.map((nameObject, index) => (
           <>
@@ -34,26 +41,29 @@ function ListGroup({ nameObjects }: Props) {
                   <AccordionIcon />
                 </AccordionButton>
               </h2>
-              <AccordionPanel pb={4} textAlign="left">
-                Gender: {nameObject.gender}
-                <br></br>
-                Weight scale 0: {nameObject.countryMap["0"]}
-                <br></br>
-                Weight scale 1: {nameObject.countryMap["-1"]}
-                <br></br>
-                Weight scale 2: {nameObject.countryMap["-2"]}
-                <br></br>
-                Weight scale 3: {nameObject.countryMap["-3"]}
-                <br></br>
-                Weight scale 4: {nameObject.countryMap["-4"]}
-                <br></br>
-                Weight scale 5: {nameObject.countryMap["-5"]}
-                <br></br>
-                Weight scale 6: {nameObject.countryMap["-6"]}
-                <br></br>
-                Weight scale 7: {nameObject.countryMap["-7"]}
-                <br></br>
-                Weight scale 8: {nameObject.countryMap["-8"]?.map((country) => (country + ", "))}
+              <AccordionPanel pb={4} textAlign="left" key={index}>
+                <Card backgroundColor="#ded8cd3d">
+                  <CardBody>
+                    <Stack divider={<StackDivider />} spacing='4'>
+                      <Box>
+                        <Heading size='xs' textTransform='uppercase'>
+                        Gender: {nameObject.gender}
+                        </Heading>
+                      </Box>
+                      <Box>
+                          {nameObject.countryMap["0"]?.length > 0 && <Text>Frequency 0: {nameObject.countryMap["0"]}</Text>}
+                          {nameObject.countryMap["-1"]?.length > 0 && <Text>Frequency 1: {nameObject.countryMap["-1"]}</Text>}
+                          {nameObject.countryMap["-2"]?.length > 0 && <Text>Frequency 2: {nameObject.countryMap["-2"]}</Text>}
+                          {nameObject.countryMap["-3"]?.length > 0 && <Text>Frequency 3: {nameObject.countryMap["-3"]}</Text>}
+                          {nameObject.countryMap["-4"]?.length > 0 && <Text>Frequency 4: {nameObject.countryMap["-4"]}</Text>}
+                          {nameObject.countryMap["-5"]?.length > 0 && <Text>Frequency 5: {nameObject.countryMap["-5"]}</Text>}
+                          {nameObject.countryMap["-6"]?.length > 0 && <Text>Frequency 6: {nameObject.countryMap["-6"]}</Text>}
+                          {nameObject.countryMap["-7"]?.length > 0 && <Text>Frequency 7: {nameObject.countryMap["-7"]}</Text>}
+                          {nameObject.countryMap["-8"]?.length > 0 && <Text>Frequency 8: {nameObject.countryMap["-8"]}</Text>}
+                      </Box>
+                    </Stack>
+                  </CardBody>
+                </Card>
               </AccordionPanel>
             </AccordionItem>
           </>

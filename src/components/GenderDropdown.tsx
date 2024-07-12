@@ -1,23 +1,33 @@
+import { Box, Grid, GridItem, HStack, Stack, Text } from "@chakra-ui/react";
+import ReactSelect from "react-select";
+import Select from "react-select/dist/declarations/src/Select";
+
 interface Props {
-  gender: string;
   setValue: (arg0: string) => void;
 }
 
-const GenderDropdown = ({ gender, setValue }: Props) => {
+const genderOptions = [
+  { value: 'All', label: 'All' },
+  { value: 'Male', label: 'Male' },
+  { value: 'Female', label: 'Female' }
+]
+
+const GenderDropdown = ({ setValue }: Props) => {
 
     return (
       <>
-      <label>Gender:</label>
-      <div className="dropdown">
-        <button className="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            {gender}
-        </button>
-        <ul className="dropdown-menu">
-            <li><a className="dropdown-item" href="#" onClick={e => setValue("All")}>All</a></li>
-            <li><a className="dropdown-item" href="#" onClick={e => setValue("Male")}>Male</a></li>
-            <li><a className="dropdown-item" href="#" onClick={e => setValue("Female")}>Female</a></li>
-        </ul>
-      </div>
+        <HStack spacing="25px">
+          <Box>
+            <Text>Gender</Text>
+          </Box>
+          <Box w="180px">
+          <ReactSelect
+            options={genderOptions}
+            isSearchable={false}
+            onChange={(e) => (setValue(e?.value?.toString()!))}>
+          </ReactSelect>
+          </Box>
+        </HStack>
       </>
     );
   }
