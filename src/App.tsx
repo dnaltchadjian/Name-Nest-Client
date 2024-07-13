@@ -1,12 +1,13 @@
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
+import '/node_modules/flag-icons/css/flag-icons.min.css';
 import './App.css';
 import api from './api/axiosConfig';
 import { useState } from 'react';
-import { Divider, Grid, GridItem, Show, Stack } from '@chakra-ui/react'
+import { Box, Divider, Grid, GridItem, HStack, Show, Stack } from '@chakra-ui/react'
 import Button from "./components/Button";
 import InputField from './components/InputField';
-import ListGroup from './components/ListGroup';
+import NameList from './components/NameList';
 import UnisexCheckbox from './components/UnisexCheckbox';
 import CountryDropdown from './components/CountryDropdown';
 import GenderDropdown from './components/GenderDropdown';
@@ -46,7 +47,6 @@ function App() {
         }
       }
       console.log("url= " + url);
-      console.log("countries= " + countries);
       const response = await api.get<FirstName[]>(url);
       console.log(response.data);
       setNameObjects(response.data);
@@ -55,20 +55,15 @@ function App() {
     }
   };
 
-
-  function makeAnimated(): Partial<import("react-select/dist/declarations/src/components").SelectComponents<{ value: string; label: string; }, false, import("react-select").GroupBase<{ value: string; label: string; }>>> | undefined {
-    throw new Error('Function not implemented.');
-  }
-
   return (
     <>
     <div className="background">
       <Grid templateAreas={{
         base: `"main"`,
-        lg: `"aside main aside2"`
+        md: `"aside main aside2"`
       }}>
-        <Show above="lg">
-          <GridItem area="aside"></GridItem>
+        <Show above="md">
+          <GridItem area="aside" width="25%"></GridItem>
         </Show>
         <GridItem area="main">
           <div className="m-0 border-0 bd-example m-0 border-0">
@@ -79,30 +74,26 @@ function App() {
             <InputField name="Suffix" fieldValue={endsWith} setValue={setEndsWith}></InputField>
             <InputField name="Contains" fieldValue={contains} setValue={setContains}></InputField>
           </Stack>
-          <Divider></Divider>
-          <Grid templateAreas={{
-            base: `"leftCol rightCol"`,
-            lg: `"leftCol rightCol"`
-            }}>
-            <GridItem area="leftCol">
+          <Divider colorScheme='dark'></Divider>
+          <HStack>
+            <Box width="30%">
               <GenderDropdown setValue={setGender}></GenderDropdown>
-              <UnisexCheckbox gender={gender} isUnisex={isUnisex} setValue={setIsUnisex}></UnisexCheckbox>
-            </GridItem>
-            <GridItem area="rightCol">
+            </Box>
+            <Box width="70%">
               <CountryDropdown setValue={setCountries}></CountryDropdown>
-            </GridItem>
-          </Grid>
-          
+            </Box>
+          </HStack>
+          <UnisexCheckbox gender={gender} isUnisex={isUnisex} setValue={setIsUnisex}></UnisexCheckbox>
           <br></br>
           <Button onClick={() => getNames()}>Find Names</Button>
           <br></br>
           <br></br>
-          <ListGroup nameObjects={nameObjects}/>
+          <NameList nameObjects={nameObjects}/>
           <br></br>
           </div>
         </GridItem>
-        <Show above="lg">
-          <GridItem area="aside2"></GridItem>
+        <Show above="md">
+          <GridItem area="aside2" width="25%"></GridItem>
         </Show>
       </Grid>
     </div>

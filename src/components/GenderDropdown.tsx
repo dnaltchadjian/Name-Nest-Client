@@ -1,4 +1,4 @@
-import { Box, Grid, GridItem, HStack, Stack, Text } from "@chakra-ui/react";
+import { Box, FormLabel, Grid, GridItem, HStack, Stack, Text } from "@chakra-ui/react";
 import ReactSelect from "react-select";
 import Select from "react-select/dist/declarations/src/Select";
 
@@ -16,9 +16,9 @@ const GenderDropdown = ({ setValue }: Props) => {
 
     return (
       <>
-        <HStack spacing="25px">
+        <Stack>
           <Box>
-            <Text>Gender</Text>
+            <FormLabel verticalAlign="center">Gender</FormLabel>
           </Box>
           <Box w="180px">
           <ReactSelect
@@ -27,7 +27,7 @@ const GenderDropdown = ({ setValue }: Props) => {
             onChange={(e) => (setValue(e?.value?.toString()!))}>
           </ReactSelect>
           </Box>
-        </HStack>
+        </Stack>
       </>
     );
   }
