@@ -26,6 +26,26 @@ function NameList({ nameObjects }: Props) {
     );
   }
 
+  const getGenderFull = (gender: string) => {
+    switch (gender) {
+      case "M":
+        return "Male";  
+      case "1M":
+        return "Male if first part of name, otherwise mostly female"
+      case "?M":
+        return "Mostly male";
+      case "F":
+        return "Female";
+      case "1F":
+        return "Female if first part of name, otherwise mostly male"
+      case "?F":
+        return "Mostly female";
+      case "?":
+        return "Unisex";
+    }
+    return "Unknown";
+  }
+
   return (
     <>
       <Heading size="sm">{nameObjects.length} names were found:</Heading>
@@ -42,12 +62,12 @@ function NameList({ nameObjects }: Props) {
                 </AccordionButton>
               </Heading>
               <AccordionPanel pb={4} textAlign="left" key={"" + index}>
-                <Card backgroundColor="#ded8cd3d">
+                <Card>
                   <CardBody>
                     <Stack divider={<StackDivider />} spacing='4'>
                       <Box>
                         <Heading size='xs' textTransform='uppercase'>
-                        Gender: {nameObject.gender}
+                        GENDER: {getGenderFull(nameObject.gender)}
                         </Heading>
                       </Box>
                       <Box>

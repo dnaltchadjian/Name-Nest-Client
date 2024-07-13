@@ -1,4 +1,4 @@
-import { HStack } from "@chakra-ui/react";
+import { HStack, Image, Text } from "@chakra-ui/react";
 import { BarChart } from "@mui/x-charts";
 
 
@@ -8,11 +8,17 @@ interface Props {
 
 function NameGraph({ nameObject }: Props) {
     
-    var dataset = [{}];
+    var dataset = [];
     var index = 0;
     var maxValue = 0;
     var minValue = 1;
+    var drawGraph = false;
+    var soloCountry, soloScore, soloPower;
     
+    /**
+     * Collect the information required for a graph, tracking the max and min values of the population distribution.
+     * If there is only 1 entry in the country map, a graph will not be drawn.
+     */
     for (const [country, score] of Object.entries(nameObject.countryMap)) {
         const powScore =  Math.pow(2, score);
         dataset[index] = {country: country, score: powScore};
@@ -22,7 +28,24 @@ function NameGraph({ nameObject }: Props) {
         if (powScore > maxValue) {
             maxValue = powScore;
         }
+        soloCountry = country;
+        soloScore = powScore;
+        soloPower = score;
+        if (index > 0) {
+            drawGraph = true;
+        }
         index++;
+        
+    }
+
+    if (!drawGraph) {
+        return (
+            <>
+            <HStack>
+                <Text verticalAlign="bottom"> This name is typically found in {soloCountry}, with a distribution of about {soloScore}% of the population.</Text>
+            </HStack>
+            </>
+        );
     }
 
     var height = 200;
@@ -32,13 +55,15 @@ function NameGraph({ nameObject }: Props) {
 
     var graphColor: [string, string];
     if (nameObject.gender.match("M")) {
-        graphColor = ['green', 'blue'];
+        graphColor = ['lightblue', 'blue'];
     } else if (nameObject.gender.match("F")) {
         graphColor = ['pink', 'purple'];
     } else {
         graphColor = ['yellow', 'orange'];
     }
-    
+
+    const valueFormatter = (value: number | null) => `${value}%`;
+
     return (
         <>
         <HStack>
@@ -54,9 +79,9 @@ function NameGraph({ nameObject }: Props) {
                     max: maxValue
                 }
             }]}
-            series={[{dataKey: "score", label: "Name frequency (% of the population)"}]}
+            series={[{dataKey: "score", label: "Name frequency (% of the population)", color: graphColor[0], valueFormatter}]}
             layout="horizontal"
-            width={900}
+            width={800}
             height={height}
         />
         </HStack>
