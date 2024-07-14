@@ -21,7 +21,7 @@ function App() {
   const [contains, setContains] = useState("");
   const [gender, setGender] = useState("All");
   const [isUnisex, setIsUnisex] = useState(false);
-  const [countries, setCountries] = useState("");
+  const [countries, setCountries] = useState<string[]>([]);
 
 
   const getNames = async () => {
@@ -80,7 +80,7 @@ function App() {
               <GenderDropdown setValue={setGender}></GenderDropdown>
             </Box>
             <Box width="70%">
-              <CountryDropdown setValue={setCountries}></CountryDropdown>
+              <CountryDropdown setCountries={setCountries}></CountryDropdown>
             </Box>
           </HStack>
           <UnisexCheckbox gender={gender} isUnisex={isUnisex} setValue={setIsUnisex}></UnisexCheckbox>

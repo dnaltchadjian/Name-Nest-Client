@@ -1,13 +1,12 @@
 import { Box, FormLabel, Stack } from "@chakra-ui/react";
-import ReactSelect, { components } from "react-select";
-import MultiValue from "react-select/dist/declarations/src/components/MultiValue";
+import ReactSelect, { components, MultiValue } from "react-select";
 
 interface Props {
-    setValue: (arg0: string) => void;
+    setCountries: (arg0: string[]) => void;
 }
 
 const countryOptions = [
-    { value: 'albania', label: 'Albania', icon: "al.svg" },
+    { value: 'albania', label: 'Albania' },
     { value: 'arabia/persia', label: 'Arabia / Persia' },
     { value: 'armenia', label: 'Armenia' },
     { value: 'austria', label: 'Austria' },
@@ -18,7 +17,16 @@ const countryOptions = [
     { value: 'belarus4', label: 'Belarus4' },
 ]
 
-const CountryDropdown = ({ setValue }: Props) => {
+const CountryDropdown = ({ setCountries }: Props) => {
+
+    const handleChange = (e: MultiValue<{ value: string; label: string; icon: string; } | { value: string; label: string; icon?: undefined; }>, ) => {
+        var countriesArray = [];
+        for (var i = 0; i < e.length; i++) {
+            countriesArray[i] = e[i].value;
+        }
+        setCountries(countriesArray);
+    }
+
     return (
         <>
             <Stack>
@@ -29,9 +37,9 @@ const CountryDropdown = ({ setValue }: Props) => {
                     <ReactSelect
                     options={countryOptions}
                     isMulti={true}
-                    isSearchable={false}
+                    isSearchable={true}
                     closeMenuOnSelect={false}
-                    onChange={(e) => setValue(e?.values?.toString()!)}
+                    onChange={(e) => handleChange(e)}
                     >             
                 </ReactSelect>
             </Box>

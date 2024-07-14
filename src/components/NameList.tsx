@@ -62,7 +62,7 @@ function NameList({ nameObjects }: Props) {
                 </AccordionButton>
               </Heading>
               <AccordionPanel pb={4} textAlign="left" key={"" + index}>
-                <Card>
+                <Card backgroundColor="#d1c6b2">
                   <CardBody>
                     <Stack divider={<StackDivider />} spacing='4'>
                       <Box>

@@ -41,8 +41,8 @@ function NameGraph({ nameObject }: Props) {
     if (!drawGraph) {
         return (
             <>
-            <HStack>
-                <Text verticalAlign="bottom"> This name is typically found in {soloCountry}, with a distribution of about {soloScore}% of the population.</Text>
+            <HStack width="fit-content">
+                <Text> This name is typically found in {soloCountry}, with a distribution of about {soloScore}% of the population.</Text>
             </HStack>
             </>
         );
@@ -81,7 +81,7 @@ function NameGraph({ nameObject }: Props) {
             }]}
             series={[{dataKey: "score", label: "Name frequency (% of the population)", color: graphColor[0], valueFormatter}]}
             layout="horizontal"
-            width={800}
+            width={500}
             height={height}
         />
         </HStack>
