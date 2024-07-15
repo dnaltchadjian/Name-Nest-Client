@@ -17,7 +17,7 @@ const UnisexCheckbox = ({ gender, isUnisex, setValue }: Props) => {
         <Checkbox
         isChecked={isUnisex}
         colorScheme="orange"
-        onChange={(e) => setValue(!isUnisex)}>Include unisex names</Checkbox>
+        onChange={() => setValue(!isUnisex)}>Include unisex names</Checkbox>
     </HStack>
     </>
   );

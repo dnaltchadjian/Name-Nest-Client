@@ -4,7 +4,7 @@ import '/node_modules/flag-icons/css/flag-icons.min.css';
 import './App.css';
 import api from './api/axiosConfig';
 import { useState } from 'react';
-import { Box, Divider, Grid, GridItem, HStack, Show, Stack } from '@chakra-ui/react'
+import { Box, Divider, Grid, GridItem, Heading, HStack, Show, Stack } from '@chakra-ui/react'
 import Button from "./components/Button";
 import InputField from './components/InputField';
 import NameList from './components/NameList';
@@ -57,18 +57,18 @@ function App() {
 
   return (
     <>
-    <div className="background">
+    <Box className="background">
       <Grid templateAreas={{
         base: `"main"`,
-        md: `"aside main aside2"`
-      }}>
-        <Show above="md">
-          <GridItem area="aside" width="25%"></GridItem>
+        lg: `"aside main main main aside2"`
+      }}
+      templateColumns='repeat(5, 1fr)'>
+        <Show above="lg">
+          <GridItem area="aside"></GridItem>
         </Show>
         <GridItem area="main">
-          <div className="m-0 border-0 bd-example m-0 border-0">
-          <h1 className="display-1">NameNest</h1>
-          <h6>The perfect name for your baby waits here!</h6>
+          <Heading>NameNest</Heading>
+          <Heading size="sm">The perfect name for your baby waits here!</Heading>
           <Stack spacing={4}>
             <InputField name="Prefix" fieldValue={startsWith} setValue={setStartsWith}></InputField>
             <InputField name="Suffix" fieldValue={endsWith} setValue={setEndsWith}></InputField>
@@ -90,13 +90,12 @@ function App() {
           <br></br>
           <NameList nameObjects={nameObjects}/>
           <br></br>
-          </div>
         </GridItem>
-        <Show above="md">
-          <GridItem area="aside2" width="25%"></GridItem>
+        <Show above="lg">
+          <GridItem area="aside2"></GridItem>
         </Show>
       </Grid>
-    </div>
+    </Box>
     </>
   );
 }
