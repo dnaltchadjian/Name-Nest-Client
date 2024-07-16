@@ -31,9 +31,9 @@ const CountryDropdown = ({ setCountries }: Props) => {
         <>
             <Stack>
                 <Box>
-                    <FormLabel verticalAlign="center">Occurs in countries (leave blank for all)</FormLabel>
+                    <FormLabel>Occurs in countries (leave blank for all)</FormLabel>
                 </Box>
-                <Box maxWidth="700px">
+                <Box>
                     <ReactSelect
                     options={countryOptions}
                     isMulti={true}

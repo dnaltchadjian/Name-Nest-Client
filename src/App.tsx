@@ -3,7 +3,7 @@ import 'bootstrap/dist/js/bootstrap.min.js';
 import '/node_modules/flag-icons/css/flag-icons.min.css';
 import './App.css';
 import api from './api/axiosConfig';
-import { useCallback, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { Box, Divider, FormLabel, Grid, GridItem, Heading, HStack, Show, Stack } from '@chakra-ui/react'
 import FindButton from "./components/FindButton";
 import InputField from './components/InputField';
@@ -108,10 +108,11 @@ function App() {
     <>
     <Box className="background">
       <Grid templateAreas={{
-        base: `"main"`,
-        lg: `"aside main main main aside2"`
+        base: `"main main main main main main"`,
+        md: `"aside main main main main aside2"`,
+        lg: `"aside aside main main aside2 aside2"`
       }}
-      templateColumns='repeat(5, 1fr)'>
+      templateColumns='repeat(6, 1fr)'>
         <Show above="lg">
           <GridItem area="aside"></GridItem>
         </Show>
@@ -124,20 +125,36 @@ function App() {
             <InputField name="Contains" fieldValue={contains} isSearchDisabledFunction={isSearchDisabledFunction}></InputField>
           </Stack>
           <Divider colorScheme="dark"></Divider>
-          <HStack>
-            <Box width="30%">
+          <Stack>
+            <Box>
               <GenderDropdown setValue={setGender}></GenderDropdown>
+              <UnisexCheckbox gender={gender} isUnisex={isUnisex} setValue={setIsUnisex}></UnisexCheckbox>
             </Box>
-            <Box width="70%">
+            <Divider colorScheme="dark"></Divider>
+            <Box>
               <CountryDropdown setCountries={setCountries}></CountryDropdown>
             </Box>
-          </HStack>
-          <UnisexCheckbox gender={gender} isUnisex={isUnisex} setValue={setIsUnisex}></UnisexCheckbox>
+          </Stack>
           <br></br>
           <FindButton onClick={() => getNameCountAndFirstNamePage()} isDisabled={isSearchDisabled}>Find Names</FindButton>
           <br></br>
           <br></br>
-        <NameList nameCount={nameCount} nameObjects={nameObjects} pageClickFunction={getNames} pageNumber={pageNumber} setPageNumber={setPageNumber}/>
+        </GridItem>
+        <Show above="lg">
+          <GridItem area="aside2"></GridItem>
+        </Show>
+      </Grid>
+      {/* second grid for displaying the names all pretty. */}
+      <Grid templateAreas={{
+        base: `"main main main main main"`,
+        lg: `"aside main main main aside2"`
+      }}
+      templateColumns='repeat(5, 1fr)'>
+        <Show above="lg">
+          <GridItem area="aside2"></GridItem>
+        </Show>
+        <GridItem area="main">
+          <NameList nameCount={nameCount} nameObjects={nameObjects} pageClickFunction={getNames} pageNumber={pageNumber} setPageNumber={setPageNumber}/>
           <br></br>
         </GridItem>
         <Show above="lg">

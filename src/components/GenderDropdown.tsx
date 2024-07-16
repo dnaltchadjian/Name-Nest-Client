@@ -18,9 +18,9 @@ const GenderDropdown = ({ setValue }: Props) => {
       <>
         <Stack>
           <Box>
-            <FormLabel verticalAlign="center">Gender</FormLabel>
+            <FormLabel>Gender</FormLabel>
           </Box>
-          <Box w="180px">
+          <Box>
           <ReactSelect
             options={genderOptions}
             isSearchable={false}
