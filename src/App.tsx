@@ -25,7 +25,14 @@ function App() {
   const [isUnisex, setIsUnisex] = useState(false);
   const [countries, setCountries] = useState<string[]>([]);
   const [isSearchDisabled, setIsSearchDisabled] = useState(true);
+  const [pageNumber, setPageNumber] = useState(1);
 
+
+  /**
+   * Builds the URL for API calls, bundling all search criteria into a parameterized URL.
+   * @param endPoint the API endpoint to hit for the call.
+   * @returns a String containing the full URL.
+   */
   const buildURL = (endPoint : string) => {
     var url = "/api/v1/" + endPoint + "?";
       if (startsWith.current !== "") {
@@ -50,6 +57,9 @@ function App() {
     return url;
   }
 
+  /**
+   * Gets a count of the names in the database from the API baed on the search criteria.
+   */
   const getNameCount = async () => {
     try {
       var url = buildURL("namesCount");
@@ -61,10 +71,14 @@ function App() {
     }
   };
 
-  const getNames = async (pageNumber : number) => {
+  /**
+   * Gets the full FirstName objects from the API based on the search criteria.
+   * @param funcPageNumber the page of results to display.
+   */
+  const getNames = async (funcPageNumber : number) => {
     try {
       var url = buildURL("namesQuery");
-      url += "&pageNumber=" + (pageNumber - 1);
+      url += "&pageNumber=" + (funcPageNumber - 1);
       console.log("url= " + url);
       const response = await api.get<FirstName[]>(url);
       console.log(response.data);
@@ -74,11 +88,18 @@ function App() {
     }
   };
 
+  /**
+   * Called when Search button is clicked. Counts names, shows first page, resets page count.
+   */
   const getNameCountAndFirstNamePage = () => {
     getNameCount();
     getNames(1);
+    setPageNumber(1);
   }
 
+  /**
+   * Disables the search based on the criteria of the search fields. If all are empty, it's disabled.
+   */
   const isSearchDisabledFunction = () => {
     setIsSearchDisabled(startsWith.current === "" && endsWith.current === "" && contains.current === "");
   }
@@ -116,7 +137,7 @@ function App() {
           <FindButton onClick={() => getNameCountAndFirstNamePage()} isDisabled={isSearchDisabled}>Find Names</FindButton>
           <br></br>
           <br></br>
-          <NameList nameCount={nameCount} nameObjects={nameObjects} pageNumberFunction={getNames}/>
+        <NameList nameCount={nameCount} nameObjects={nameObjects} pageClickFunction={getNames} pageNumber={pageNumber} setPageNumber={setPageNumber}/>
           <br></br>
         </GridItem>
         <Show above="lg">

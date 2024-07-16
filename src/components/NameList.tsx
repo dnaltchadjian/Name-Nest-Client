@@ -19,12 +19,12 @@ import { useState } from "react";
 interface Props {
   nameObjects: FirstName[];
   nameCount: number;
-  pageNumberFunction: (pageNumber: number) => void;
+  pageNumber: number;
+  setPageNumber: (pageNumber: number) => void;
+  pageClickFunction: (pageNumber: number) => void;
 }
 
-function NameList({ nameObjects, nameCount, pageNumberFunction }: Props) {
-
-  const [pageNumber, setPageNumber] = useState(1);
+function NameList({ nameObjects, nameCount, pageNumber, setPageNumber, pageClickFunction }: Props) {
   
   if (nameObjects === null || nameObjects.length === 0) {
     return (
@@ -55,8 +55,8 @@ function NameList({ nameObjects, nameCount, pageNumberFunction }: Props) {
   }
 
   const handlePageChange = (event: React.ChangeEvent<unknown>, eventPageNumber: number) => {
+    pageClickFunction(eventPageNumber);
     setPageNumber(eventPageNumber);
-    pageNumberFunction(eventPageNumber);
   }
 
   return (
