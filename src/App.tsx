@@ -14,7 +14,9 @@ import GenderDropdown from './components/GenderDropdown';
 
 function App() {
 
+  //count is separate from the actual objects so pagination can be created
   const [nameObjects, setNameObjects] = useState<FirstName[]>([]);
+  const [nameCount, setNameCount] = useState(0);
 
   const [startsWith, setStartsWith] = useState("");
   const [endsWith, setEndsWith] = useState("");
@@ -24,9 +26,8 @@ function App() {
   const [countries, setCountries] = useState<string[]>([]);
 
 
-  const getNames = async () => {
-    try {
-      var url = "/api/v1/namesQuery?";
+  const buildURL = () => {
+    var url = "/api/v1/namesQuery?";
       if (startsWith !== "") {
         url += "&startsWith=" + startsWith;
       }
@@ -46,6 +47,25 @@ function App() {
           url += "&isUnisex=true";
         }
       }
+    return url;
+  }
+
+  const getNameCount = async () => {
+    try {
+      var url = buildURL();
+      console.log("url= " + url);
+      const response = await api.get<FirstName[]>(url);
+      console.log(response.data.length);
+      setNameCount(response.data.length);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const getNames = async (pageNumber : number) => {
+    try {
+      var url = buildURL();
+      url += "&pageNumber=" + pageNumber;
       console.log("url= " + url);
       const response = await api.get<FirstName[]>(url);
       console.log(response.data);
@@ -54,6 +74,11 @@ function App() {
       console.log(err);
     }
   };
+
+  const getNameCountAndFirstNamePage = () => {
+    getNameCount();
+    getNames(1);
+  }
 
   return (
     <>
@@ -85,10 +110,10 @@ function App() {
           </HStack>
           <UnisexCheckbox gender={gender} isUnisex={isUnisex} setValue={setIsUnisex}></UnisexCheckbox>
           <br></br>
-          <Button onClick={() => getNames()}>Find Names</Button>
+          <Button onClick={() => getNameCountAndFirstNamePage()}>Find Names</Button>
           <br></br>
           <br></br>
-          <NameList nameObjects={nameObjects}/>
+          <NameList nameCount={nameCount} nameObjects={nameObjects} pageNumberFunction={getNames}/>
           <br></br>
         </GridItem>
         <Show above="lg">

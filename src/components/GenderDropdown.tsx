@@ -7,9 +7,9 @@ interface Props {
 }
 
 const genderOptions = [
-  { value: 'All', label: 'All' },
-  { value: 'Male', label: 'Male' },
-  { value: 'Female', label: 'Female' }
+  { id: 'All', value: 'All', label: 'All' },
+  { id: 'Male', value: 'Male', label: 'Male' },
+  { id: 'Female', value: 'Female', label: 'Female' }
 ]
 
 const GenderDropdown = ({ setValue }: Props) => {

@@ -8,16 +8,21 @@ import {
   Card,
   CardBody,
   Heading,
+  HStack,
   Stack,
   StackDivider,
 } from "@chakra-ui/react";
 import NameGraph from "./NameGraph";
+import { Pagination } from "@mui/material";
 
 interface Props {
   nameObjects: FirstName[];
+  nameCount: number;
+  pageNumberFunction: (pageNumber: number) => void;
 }
 
-function NameList({ nameObjects }: Props) {
+function NameList({ nameObjects, nameCount, pageNumberFunction }: Props) {
+  
   if (nameObjects === null || nameObjects.length === 0) {
     return (
       <>
@@ -46,10 +51,19 @@ function NameList({ nameObjects }: Props) {
     return "Unknown";
   }
 
+  const handlePageChange = (event: React.ChangeEvent<unknown>, pageNumber: number) => {
+    pageNumberFunction(pageNumber);
+  }
+
   return (
     <>
-      <Heading size="sm">{nameObjects.length} names were found:</Heading>
-      <Accordion defaultIndex={[]} allowMultiple key={nameObjects[0]?.name}>
+      <Heading size="sm">{nameCount} names were found:</Heading>
+      <Box display="inline-block">
+        <Pagination count={Math.round(nameCount / 10)} variant="outlined" shape="rounded" onChange={handlePageChange}></Pagination>
+      </Box>
+      <br></br>
+      <br></br>
+      <Accordion defaultIndex={[]} allowMultiple>
         {nameObjects?.map((nameObject, index) => (
           <>
             <AccordionItem key={"" + index}>
@@ -61,7 +75,7 @@ function NameList({ nameObjects }: Props) {
                   <AccordionIcon />
                 </AccordionButton>
               </Heading>
-              <AccordionPanel pb={4} textAlign="left" key={"" + index}>
+              <AccordionPanel pb={4} textAlign="left">
                 <Card backgroundColor="#d1c6b2">
                   <CardBody>
                     <Stack divider={<StackDivider />} spacing='4'>
