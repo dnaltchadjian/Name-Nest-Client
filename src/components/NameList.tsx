@@ -14,6 +14,7 @@ import {
 } from "@chakra-ui/react";
 import NameGraph from "./NameGraph";
 import { Pagination } from "@mui/material";
+import { useState } from "react";
 
 interface Props {
   nameObjects: FirstName[];
@@ -22,6 +23,8 @@ interface Props {
 }
 
 function NameList({ nameObjects, nameCount, pageNumberFunction }: Props) {
+
+  const [pageNumber, setPageNumber] = useState(1);
   
   if (nameObjects === null || nameObjects.length === 0) {
     return (
@@ -51,16 +54,17 @@ function NameList({ nameObjects, nameCount, pageNumberFunction }: Props) {
     return "Unknown";
   }
 
-  const handlePageChange = (event: React.ChangeEvent<unknown>, pageNumber: number) => {
-    pageNumberFunction(pageNumber);
+  const handlePageChange = (event: React.ChangeEvent<unknown>, eventPageNumber: number) => {
+    setPageNumber(eventPageNumber);
+    pageNumberFunction(eventPageNumber);
   }
 
   return (
     <>
-      <Heading size="sm">{nameCount} names were found:</Heading>
-      <Box display="inline-block">
-        <Pagination count={Math.round(nameCount / 10)} variant="outlined" shape="rounded" onChange={handlePageChange}></Pagination>
-      </Box>
+      <HStack display="inline-block">
+        <Heading size="xs">{(pageNumber - 1) * 10 + 1} - {Math.min((pageNumber * 10), nameCount)} of {nameCount} names</Heading>
+        <Pagination count={Math.ceil(nameCount / 10)} variant="outlined" shape="rounded" onChange={handlePageChange}></Pagination>
+      </HStack>
       <br></br>
       <br></br>
       <Accordion defaultIndex={[]} allowMultiple>

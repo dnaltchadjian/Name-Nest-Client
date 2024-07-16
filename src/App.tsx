@@ -3,9 +3,9 @@ import 'bootstrap/dist/js/bootstrap.min.js';
 import '/node_modules/flag-icons/css/flag-icons.min.css';
 import './App.css';
 import api from './api/axiosConfig';
-import { useState } from 'react';
-import { Box, Divider, Grid, GridItem, Heading, HStack, Show, Stack } from '@chakra-ui/react'
-import Button from "./components/Button";
+import { useCallback, useRef, useState } from 'react';
+import { Box, Divider, FormLabel, Grid, GridItem, Heading, HStack, Show, Stack } from '@chakra-ui/react'
+import FindButton from "./components/FindButton";
 import InputField from './components/InputField';
 import NameList from './components/NameList';
 import UnisexCheckbox from './components/UnisexCheckbox';
@@ -18,24 +18,24 @@ function App() {
   const [nameObjects, setNameObjects] = useState<FirstName[]>([]);
   const [nameCount, setNameCount] = useState(0);
 
-  const [startsWith, setStartsWith] = useState("");
-  const [endsWith, setEndsWith] = useState("");
-  const [contains, setContains] = useState("");
+  const startsWith = useRef<string>("");
+  const endsWith = useRef<string>("");
+  const contains = useRef<string>("");
   const [gender, setGender] = useState("All");
   const [isUnisex, setIsUnisex] = useState(false);
   const [countries, setCountries] = useState<string[]>([]);
+  const [isSearchDisabled, setIsSearchDisabled] = useState(true);
 
-
-  const buildURL = () => {
-    var url = "/api/v1/namesQuery?";
-      if (startsWith !== "") {
-        url += "&startsWith=" + startsWith;
+  const buildURL = (endPoint : string) => {
+    var url = "/api/v1/" + endPoint + "?";
+      if (startsWith.current !== "") {
+        url += "&startsWith=" + startsWith.current;
       }
-      if (endsWith !== "") {
-        url += "&endsWith=" + endsWith;
+      if (endsWith.current !== "") {
+        url += "&endsWith=" + endsWith.current;
       }
-      if (contains !== "") {
-        url += "&contains=" + contains;
+      if (contains.current !== "") {
+        url += "&contains=" + contains.current;
       }
       if (gender !== "All") {
         if (gender === "Male") {
@@ -52,11 +52,10 @@ function App() {
 
   const getNameCount = async () => {
     try {
-      var url = buildURL();
+      var url = buildURL("namesCount");
       console.log("url= " + url);
-      const response = await api.get<FirstName[]>(url);
-      console.log(response.data.length);
-      setNameCount(response.data.length);
+      const response = await api.get(url);
+      setNameCount(response.data);
     } catch (err) {
       console.log(err);
     }
@@ -64,8 +63,8 @@ function App() {
 
   const getNames = async (pageNumber : number) => {
     try {
-      var url = buildURL();
-      url += "&pageNumber=" + pageNumber;
+      var url = buildURL("namesQuery");
+      url += "&pageNumber=" + (pageNumber - 1);
       console.log("url= " + url);
       const response = await api.get<FirstName[]>(url);
       console.log(response.data);
@@ -78,6 +77,10 @@ function App() {
   const getNameCountAndFirstNamePage = () => {
     getNameCount();
     getNames(1);
+  }
+
+  const isSearchDisabledFunction = () => {
+    setIsSearchDisabled(startsWith.current === "" && endsWith.current === "" && contains.current === "");
   }
 
   return (
@@ -93,13 +96,13 @@ function App() {
         </Show>
         <GridItem area="main">
           <Heading>NameNest</Heading>
-          <Heading size="sm">The perfect name for your baby waits here!</Heading>
+          <FormLabel display="inline-block">The perfect name for your baby waits here!</FormLabel>
           <Stack spacing={4}>
-            <InputField name="Prefix" fieldValue={startsWith} setValue={setStartsWith}></InputField>
-            <InputField name="Suffix" fieldValue={endsWith} setValue={setEndsWith}></InputField>
-            <InputField name="Contains" fieldValue={contains} setValue={setContains}></InputField>
+            <InputField name="Prefix" fieldValue={startsWith} isSearchDisabledFunction={isSearchDisabledFunction}></InputField>
+            <InputField name="Suffix" fieldValue={endsWith} isSearchDisabledFunction={isSearchDisabledFunction}></InputField>
+            <InputField name="Contains" fieldValue={contains} isSearchDisabledFunction={isSearchDisabledFunction}></InputField>
           </Stack>
-          <Divider colorScheme='dark'></Divider>
+          <Divider colorScheme="dark"></Divider>
           <HStack>
             <Box width="30%">
               <GenderDropdown setValue={setGender}></GenderDropdown>
@@ -110,7 +113,7 @@ function App() {
           </HStack>
           <UnisexCheckbox gender={gender} isUnisex={isUnisex} setValue={setIsUnisex}></UnisexCheckbox>
           <br></br>
-          <Button onClick={() => getNameCountAndFirstNamePage()}>Find Names</Button>
+          <FindButton onClick={() => getNameCountAndFirstNamePage()} isDisabled={isSearchDisabled}>Find Names</FindButton>
           <br></br>
           <br></br>
           <NameList nameCount={nameCount} nameObjects={nameObjects} pageNumberFunction={getNames}/>

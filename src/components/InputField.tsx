@@ -1,17 +1,24 @@
-import { Input, InputGroup, InputLeftAddon, Stack } from "@chakra-ui/react";
+import { Input, InputGroup, InputLeftAddon } from "@chakra-ui/react";
+import { MutableRefObject } from "react";
 
 interface Props {
   name: string;
-  fieldValue: string;
-  setValue: (arg0: string) => void;
+  fieldValue: MutableRefObject<string>;
+  isSearchDisabledFunction: () => void;
 }
 
-const InputField = ({ name, fieldValue, setValue }: Props) => {
+const InputField = ({ name, fieldValue, isSearchDisabledFunction }: Props) => {
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    fieldValue.current = (event.target.value);
+    isSearchDisabledFunction();
+  }
+
   return (
     <>
       <InputGroup>
         <InputLeftAddon>{name}</InputLeftAddon>
-        <Input onChange={(e) => setValue(e.target.value)} value={fieldValue} backgroundColor="white"/>
+        <Input onChange={(e) => handleChange(e)} backgroundColor="white"/>
       </InputGroup>
     </>
   );
