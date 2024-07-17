@@ -1,5 +1,10 @@
 export class NameUtil {
 
+  /**
+   * Gets the display name for a pretty-printed gender.
+   * @param gender the gender string straight from the API call.
+   * @returns a pretty-print ready gender.
+   */
   static getGenderFull(gender: string) {
     switch (gender) {
       case "M":
@@ -20,6 +25,11 @@ export class NameUtil {
     return "Unknown";
   }
 
+  /**
+   * Formats an array of countries for the API call.
+   * @param countries the input array of countries.
+   * @returns the formatted segment of the URL.
+   */
   static getCountriesFormatted(countries: string[]) {
     var formattedCountries = "";
     countries.forEach((country) => {

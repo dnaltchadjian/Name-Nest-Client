@@ -48,7 +48,7 @@ function NameList({ nameObjects, nameCount, pageNumber, searchExecuted, setPageN
     <>
       <HStack display="inline-block">
         <Heading size="xs">{(pageNumber - 1) * 10 + 1} - {Math.min((pageNumber * 10), nameCount)} of {nameCount} names</Heading>
-        <Pagination count={Math.ceil(nameCount / 10)} variant="outlined" shape="rounded" onChange={handlePageChange}></Pagination>
+        <Pagination count={Math.ceil(nameCount / 10)} variant="outlined" shape="rounded" onChange={handlePageChange} page={pageNumber}></Pagination>
       </HStack>
       <br></br>
       <br></br>
