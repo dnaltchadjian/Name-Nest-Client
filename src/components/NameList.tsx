@@ -14,44 +14,29 @@ import {
 } from "@chakra-ui/react";
 import NameGraph from "./NameGraph";
 import { Pagination } from "@mui/material";
-import { useState } from "react";
+import { NameUtil } from "../util/NameUtil";
 
 interface Props {
   nameObjects: FirstName[];
   nameCount: number;
   pageNumber: number;
+  searchExecuted: boolean;
   setPageNumber: (pageNumber: number) => void;
   pageClickFunction: (pageNumber: number) => void;
 }
 
-function NameList({ nameObjects, nameCount, pageNumber, setPageNumber, pageClickFunction }: Props) {
+function NameList({ nameObjects, nameCount, pageNumber, searchExecuted, setPageNumber, pageClickFunction }: Props) {
   
+  if (!searchExecuted) {
+    return (<></>);
+  }
+
   if (nameObjects === null || nameObjects.length === 0) {
     return (
       <>
         <Heading size="sm">No names could be found with this criteria.</Heading>
       </>
     );
-  }
-
-  const getGenderFull = (gender: string) => {
-    switch (gender) {
-      case "M":
-        return "Male";  
-      case "1M":
-        return "Male if first part of name, otherwise mostly female"
-      case "?M":
-        return "Mostly male";
-      case "F":
-        return "Female";
-      case "1F":
-        return "Female if first part of name, otherwise mostly male"
-      case "?F":
-        return "Mostly female";
-      case "?":
-        return "Unisex";
-    }
-    return "Unknown";
   }
 
   const handlePageChange = (event: React.ChangeEvent<unknown>, eventPageNumber: number) => {
@@ -85,7 +70,7 @@ function NameList({ nameObjects, nameCount, pageNumber, setPageNumber, pageClick
                     <Stack divider={<StackDivider />} spacing='4'>
                       <Box>
                         <Heading size='xs' textTransform='uppercase'>
-                        GENDER: {getGenderFull(nameObject.gender)}
+                        GENDER: {NameUtil.getGenderFull(nameObject.gender)}
                         </Heading>
                       </Box>
                       <Box>

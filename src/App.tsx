@@ -11,6 +11,7 @@ import NameList from './components/NameList';
 import UnisexCheckbox from './components/UnisexCheckbox';
 import CountryDropdown from './components/CountryDropdown';
 import GenderDropdown from './components/GenderDropdown';
+import { NameUtil } from './util/NameUtil';
 
 function App() {
 
@@ -18,12 +19,15 @@ function App() {
   const [nameObjects, setNameObjects] = useState<FirstName[]>([]);
   const [nameCount, setNameCount] = useState(0);
 
+  //url items
   const startsWith = useRef<string>("");
   const endsWith = useRef<string>("");
   const contains = useRef<string>("");
   const [gender, setGender] = useState("All");
   const [isUnisex, setIsUnisex] = useState(false);
   const [countries, setCountries] = useState<string[]>([]);
+
+  const [searchExecuted, setSearchExecuted] = useState(false);
   const [isSearchDisabled, setIsSearchDisabled] = useState(true);
   const [pageNumber, setPageNumber] = useState(1);
 
@@ -54,6 +58,7 @@ function App() {
           url += "&isUnisex=true";
         }
       }
+      url += NameUtil.getCountriesFormatted(countries);
     return url;
   }
 
@@ -95,6 +100,7 @@ function App() {
     getNameCount();
     getNames(1);
     setPageNumber(1);
+    setSearchExecuted(true);
   }
 
   /**
@@ -147,17 +153,18 @@ function App() {
       {/* second grid for displaying the names all pretty. */}
       <Grid templateAreas={{
         base: `"main main main main main"`,
-        lg: `"aside main main main aside2"`
+        xl: `"aside main main main aside2"`
       }}
       templateColumns='repeat(5, 1fr)'>
-        <Show above="lg">
+        <Show above="xl">
           <GridItem area="aside2"></GridItem>
         </Show>
         <GridItem area="main">
-          <NameList nameCount={nameCount} nameObjects={nameObjects} pageClickFunction={getNames} pageNumber={pageNumber} setPageNumber={setPageNumber}/>
+          <NameList nameCount={nameCount} nameObjects={nameObjects} searchExecuted={searchExecuted}
+            pageNumber={pageNumber} setPageNumber={setPageNumber} pageClickFunction={getNames} />
           <br></br>
         </GridItem>
-        <Show above="lg">
+        <Show above="xl">
           <GridItem area="aside2"></GridItem>
         </Show>
       </Grid>

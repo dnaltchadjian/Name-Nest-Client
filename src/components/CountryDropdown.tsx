@@ -1,21 +1,10 @@
 import { Box, FormLabel, Stack } from "@chakra-ui/react";
 import ReactSelect, { components, MultiValue } from "react-select";
+import { NameUtil } from "../util/NameUtil";
 
 interface Props {
     setCountries: (arg0: string[]) => void;
 }
-
-const countryOptions = [
-    { value: 'albania', label: 'Albania' },
-    { value: 'arabia/persia', label: 'Arabia / Persia' },
-    { value: 'armenia', label: 'Armenia' },
-    { value: 'austria', label: 'Austria' },
-    { value: 'azerbaijan', label: 'Azerbaijan' },
-    { value: 'belarus', label: 'Belarus' },
-    { value: 'belarus2', label: 'Belarus2' },
-    { value: 'belarus3', label: 'Belarus3' },
-    { value: 'belarus4', label: 'Belarus4' },
-]
 
 const CountryDropdown = ({ setCountries }: Props) => {
 
@@ -35,12 +24,12 @@ const CountryDropdown = ({ setCountries }: Props) => {
                 </Box>
                 <Box>
                     <ReactSelect
-                    options={countryOptions}
+                    options={NameUtil.labelledCountries}
                     isMulti={true}
                     isSearchable={true}
                     closeMenuOnSelect={false}
                     onChange={(e) => handleChange(e)}
-                    >             
+                    >
                 </ReactSelect>
             </Box>
           </Stack>
