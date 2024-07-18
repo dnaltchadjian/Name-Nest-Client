@@ -123,7 +123,7 @@ function App() {
           <GridItem area="aside"></GridItem>
         </Show>
         <GridItem area="main">
-          <Heading>NameNest</Heading>
+          <h1 className='display-3'>NameNest</h1>
           <FormLabel display="inline-block">The perfect name for your baby waits here!</FormLabel>
           <Stack spacing={4}>
             <InputField name="Prefix" fieldValue={startsWith} isSearchDisabledFunction={isSearchDisabledFunction}></InputField>

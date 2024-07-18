@@ -20,7 +20,7 @@ const CountryDropdown = ({ setCountries }: Props) => {
         <>
             <Stack>
                 <Box>
-                    <FormLabel>Occurs in countries (leave blank for all)</FormLabel>
+                    <FormLabel display="inline-block">Occurs in countries (leave blank for all)</FormLabel>
                 </Box>
                 <Box>
                     <ReactSelect

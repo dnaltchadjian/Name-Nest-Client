@@ -18,7 +18,7 @@ const GenderDropdown = ({ setValue }: Props) => {
       <>
         <Stack>
           <Box>
-            <FormLabel>Gender</FormLabel>
+            <FormLabel display="inline-block">Gender</FormLabel>
           </Box>
           <Box>
           <ReactSelect

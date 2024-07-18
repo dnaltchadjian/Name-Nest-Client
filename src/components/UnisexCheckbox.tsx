@@ -13,7 +13,7 @@ const UnisexCheckbox = ({ gender, isUnisex, setValue }: Props) => {
   return (
     <>
     <Box height="5px"></Box>
-    <HStack spacing="25px">
+    <HStack spacing="25px" display="inline-block">
         <Checkbox
         isChecked={isUnisex}
         colorScheme="orange"
