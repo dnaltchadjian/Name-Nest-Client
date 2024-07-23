@@ -27,9 +27,10 @@ interface Props {
   searchExecuted: boolean;
   setPageNumber: (pageNumber: number) => void;
   pageClickFunction: (pageNumber: number) => void;
+  favoriteFunction: (name: string) => void;
 }
 
-function NameList({ nameObjects, nameCount, pageNumber, searchExecuted, setPageNumber, pageClickFunction }: Props) {
+function NameList({ nameObjects, nameCount, pageNumber, searchExecuted, setPageNumber, pageClickFunction, favoriteFunction }: Props) {
   
   if (!searchExecuted) {
     return (<></>);
@@ -79,7 +80,7 @@ function NameList({ nameObjects, nameCount, pageNumber, searchExecuted, setPageN
                           </Heading>
                         </GridItem>
                         <GridItem colStart={6} colEnd={6} textAlign="right">
-                          <Button rightIcon={<FaStar/>} size="sm">
+                          <Button rightIcon={<FaStar/>} size="sm" onClick={() => favoriteFunction(nameObject.name)}>
                             Favorite
                           </Button>
                         </GridItem>

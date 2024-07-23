@@ -1,7 +1,11 @@
 import { Button, Drawer, DrawerBody, DrawerContent, DrawerHeader, DrawerOverlay, Square, useDisclosure } from "@chakra-ui/react";
 import { FaStar } from "@react-icons/all-files/fa/FaStar";
 
-const FavouritesDrawer = () => {
+interface Props {
+    favorites: Map<string, boolean>;
+}
+
+const FavouritesDrawer = (favorites : Props) => {
     
     const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -13,7 +17,7 @@ const FavouritesDrawer = () => {
             <Drawer placement="left" onClose={onClose} isOpen={isOpen}>
                 <DrawerOverlay />
                 <DrawerContent>
-                    <DrawerHeader borderBottomWidth='1px'>Basic Drawer</DrawerHeader>
+                    <DrawerHeader borderBottomWidth='1px'>Favorite Names</DrawerHeader>
                     <DrawerBody>
                         <p>Some contents...</p>
                         <p>Some contents...</p>

@@ -4,7 +4,7 @@ import '/node_modules/flag-icons/css/flag-icons.min.css';
 import './App.css';
 import api from './api/axiosConfig';
 import { useEffect, useRef, useState } from 'react';
-import { Box, Divider, FormLabel, Grid, GridItem, Heading, HStack, Show, Stack } from '@chakra-ui/react'
+import { Box, FormLabel, Grid, GridItem, Show, Stack } from '@chakra-ui/react'
 import FindButton from "./components/FindButton";
 import InputField from './components/InputField';
 import NameList from './components/NameList';
@@ -13,10 +13,11 @@ import CountryDropdown from './components/CountryDropdown';
 import GenderDropdown from './components/GenderDropdown';
 import { NameUtil } from './util/NameUtil';
 import FavouritesDrawer from './components/FavouritesDrawer';
+import AboutPopup from './components/AboutPopup';
 
 function App() {
 
-  //count is separate from the actual objects so pagination can be created
+  //name count and objects from api
   const [nameObjects, setNameObjects] = useState<FirstName[]>([]);
   const [nameCount, setNameCount] = useState(0);
 
@@ -27,8 +28,9 @@ function App() {
   const [gender, setGender] = useState("All");
   const [isUnisex, setIsUnisex] = useState(false);
   const [countries, setCountries] = useState<string[]>([]);
-  const [favouriteNames, setFavouriteNames] = useState("");
 
+  //functional stuff
+  const [favouriteNames, setFavouriteNames] = useState<Map<string, boolean>>(new Map);
   const [searchExecuted, setSearchExecuted] = useState(false);
   const [isSearchDisabled, setIsSearchDisabled] = useState(true);
   const [pageNumber, setPageNumber] = useState(1);
@@ -105,6 +107,10 @@ function App() {
     setSearchExecuted(true);
   }
 
+  const buildFavorites = () => {
+    
+  }
+
   /**
    * Disables the search based on the criteria of the search fields. If all are empty, it's disabled.
    */
@@ -138,10 +144,13 @@ function App() {
         <GridItem area="main">
           <Grid templateColumns='repeat(10, 1fr)' alignItems="baseline" padding={0}>
             <GridItem colStart={1} colSpan={1} alignItems="start">
-              <FavouritesDrawer></FavouritesDrawer>
+                <FavouritesDrawer favorites={favouriteNames}></FavouritesDrawer>
             </GridItem>
             <GridItem colStart={2} colSpan={8}>
               <h1 className='display-5'>NameNest</h1>
+            </GridItem>
+            <GridItem colStart={10} alignItems="start">
+              <AboutPopup></AboutPopup>
             </GridItem>
           </Grid>
           <hr className="divider-padding"></hr>
@@ -182,7 +191,7 @@ function App() {
         </Show>
         <GridItem area="main">
           <NameList nameCount={nameCount} nameObjects={nameObjects} searchExecuted={searchExecuted}
-            pageNumber={pageNumber} setPageNumber={setPageNumber} pageClickFunction={getNames} />
+            pageNumber={pageNumber} setPageNumber={setPageNumber} pageClickFunction={getNames} favoriteFunction={buildFavorites}/>
           <br></br>
         </GridItem>
         <Show above="xl">
