@@ -3,7 +3,7 @@ import 'bootstrap/dist/js/bootstrap.min.js';
 import '/node_modules/flag-icons/css/flag-icons.min.css';
 import './App.css';
 import api from './api/axiosConfig';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Box, Divider, FormLabel, Grid, GridItem, Heading, HStack, Show, Stack } from '@chakra-ui/react'
 import FindButton from "./components/FindButton";
 import InputField from './components/InputField';
@@ -12,6 +12,7 @@ import UnisexCheckbox from './components/UnisexCheckbox';
 import CountryDropdown from './components/CountryDropdown';
 import GenderDropdown from './components/GenderDropdown';
 import { NameUtil } from './util/NameUtil';
+import FavouritesDrawer from './components/FavouritesDrawer';
 
 function App() {
 
@@ -26,6 +27,7 @@ function App() {
   const [gender, setGender] = useState("All");
   const [isUnisex, setIsUnisex] = useState(false);
   const [countries, setCountries] = useState<string[]>([]);
+  const [favouriteNames, setFavouriteNames] = useState("");
 
   const [searchExecuted, setSearchExecuted] = useState(false);
   const [isSearchDisabled, setIsSearchDisabled] = useState(true);
@@ -110,6 +112,17 @@ function App() {
     setIsSearchDisabled(startsWith.current === "" && endsWith.current === "" && contains.current === "");
   }
 
+  useEffect(() => {
+    const favouritesData = window.localStorage.getItem("FAVOURITE_NAMES");
+    if (favouritesData !== null) {
+      setFavouriteNames(JSON.parse(favouritesData));
+    }
+  }, [])
+
+  useEffect(() => {
+    window.localStorage.setItem("FAVOURITE_NAMES", JSON.stringify(favouriteNames));
+  }, [favouriteNames])
+
   return (
     <>
     <Box className="background">
@@ -123,20 +136,28 @@ function App() {
           <GridItem area="aside"></GridItem>
         </Show>
         <GridItem area="main">
-          <h1 className='display-3'>NameNest</h1>
+          <Grid templateColumns='repeat(10, 1fr)' alignItems="baseline" padding={0}>
+            <GridItem colStart={1} colSpan={1} alignItems="start">
+              <FavouritesDrawer></FavouritesDrawer>
+            </GridItem>
+            <GridItem colStart={2} colSpan={8}>
+              <h1 className='display-3'>NameNest</h1>
+            </GridItem>
+          </Grid>
+          <hr className="divider-padding"></hr>
           <FormLabel display="inline-block">The perfect name for your baby waits here!</FormLabel>
           <Stack spacing={4}>
             <InputField name="Prefix" fieldValue={startsWith} isSearchDisabledFunction={isSearchDisabledFunction}></InputField>
             <InputField name="Suffix" fieldValue={endsWith} isSearchDisabledFunction={isSearchDisabledFunction}></InputField>
             <InputField name="Contains" fieldValue={contains} isSearchDisabledFunction={isSearchDisabledFunction}></InputField>
           </Stack>
-          <Divider colorScheme="dark"></Divider>
+          <hr></hr>
           <Stack>
             <Box>
               <GenderDropdown setValue={setGender}></GenderDropdown>
               <UnisexCheckbox gender={gender} isUnisex={isUnisex} setValue={setIsUnisex}></UnisexCheckbox>
             </Box>
-            <Divider colorScheme="dark"></Divider>
+            <hr></hr>
             <Box>
               <CountryDropdown setCountries={setCountries}></CountryDropdown>
             </Box>

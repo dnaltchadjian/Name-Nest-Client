@@ -5,13 +5,17 @@ import {
   AccordionItem,
   AccordionPanel,
   Box,
+  Button,
   Card,
   CardBody,
+  Grid,
+  GridItem,
   Heading,
   HStack,
   Stack,
   StackDivider,
 } from "@chakra-ui/react";
+import { FaStar } from "@react-icons/all-files/fa/FaStar";
 import NameGraph from "./NameGraph";
 import { Pagination } from "@mui/material";
 import { NameUtil } from "../util/NameUtil";
@@ -68,11 +72,18 @@ function NameList({ nameObjects, nameCount, pageNumber, searchExecuted, setPageN
                 <Card backgroundColor="#d1c6b2">
                   <CardBody>
                     <Stack divider={<StackDivider />} spacing='4'>
-                      <Box>
-                        <Heading size='xs' textTransform='uppercase'>
-                        GENDER: {NameUtil.getGenderFull(nameObject.gender)}
-                        </Heading>
-                      </Box>
+                      <Grid templateColumns="repeat(6, 1fr)">
+                        <GridItem colSpan={1}>
+                          <Heading size='sm' textTransform='uppercase'>
+                          {NameUtil.getGenderFull(nameObject.gender)}
+                          </Heading>
+                        </GridItem>
+                        <GridItem colStart={6} colEnd={6} textAlign="right">
+                          <Button rightIcon={<FaStar/>} size="sm">
+                            Favorite
+                          </Button>
+                        </GridItem>
+                      </Grid>
                       <Box>
                         <NameGraph nameObject={nameObject}></NameGraph>
                       </Box>

@@ -12,6 +12,11 @@ html, body, #root {
     text-align: center;
 }
 
+.divider-padding {
+    margin-top: 0px;
+    margin-bottom: 10px;
+}
+
 .paler-oak {
     background-color: #ded8cdaf;
 }

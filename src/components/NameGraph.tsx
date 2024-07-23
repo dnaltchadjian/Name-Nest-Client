@@ -49,8 +49,8 @@ function NameGraph({ nameObject }: Props) {
     }
 
     var height = 200;
-    if (dataset.length * 20 > height) {
-        height = dataset.length * 20;
+    if (dataset.length * 30 > height) {
+        height = dataset.length * 30;
     }
 
     var graphColor: [string, string];
