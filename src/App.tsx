@@ -141,7 +141,7 @@ function App() {
               <FavouritesDrawer></FavouritesDrawer>
             </GridItem>
             <GridItem colStart={2} colSpan={8}>
-              <h1 className='display-3'>NameNest</h1>
+              <h1 className='display-5'>NameNest</h1>
             </GridItem>
           </Grid>
           <hr className="divider-padding"></hr>
