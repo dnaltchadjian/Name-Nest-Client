@@ -156,8 +156,8 @@ function App() {
           <hr className="divider-padding"></hr>
           <FormLabel display="inline-block">The perfect name for your baby waits here!</FormLabel>
           <Stack spacing={4}>
-            <InputField name="Prefix" fieldValue={startsWith} isSearchDisabledFunction={isSearchDisabledFunction}></InputField>
-            <InputField name="Suffix" fieldValue={endsWith} isSearchDisabledFunction={isSearchDisabledFunction}></InputField>
+            <InputField name="Starts With" fieldValue={startsWith} isSearchDisabledFunction={isSearchDisabledFunction}></InputField>
+            <InputField name="Ends With" fieldValue={endsWith} isSearchDisabledFunction={isSearchDisabledFunction}></InputField>
             <InputField name="Contains" fieldValue={contains} isSearchDisabledFunction={isSearchDisabledFunction}></InputField>
           </Stack>
           <hr></hr>

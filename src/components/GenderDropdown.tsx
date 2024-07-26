@@ -23,6 +23,7 @@ const GenderDropdown = ({ setValue }: Props) => {
           <Box>
           <ReactSelect
             options={genderOptions}
+            defaultValue={genderOptions[0]}
             isSearchable={false}
             onChange={(e) => (setValue(e?.value?.toString()!))}>
           </ReactSelect>

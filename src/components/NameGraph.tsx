@@ -1,5 +1,6 @@
-import { HStack, Image, Text } from "@chakra-ui/react";
+import { HStack, Text } from "@chakra-ui/react";
 import { BarChart } from "@mui/x-charts";
+import { NameUtil } from "../util/NameUtil";
 
 
 interface Props {
@@ -28,7 +29,7 @@ function NameGraph({ nameObject }: Props) {
         if (powScore > maxValue) {
             maxValue = powScore;
         }
-        soloCountry = country;
+        soloCountry = NameUtil.getCountryLabel(country);
         soloScore = powScore;
         soloPower = score;
         if (index > 0) {

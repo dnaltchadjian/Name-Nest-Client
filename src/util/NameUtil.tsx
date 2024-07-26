@@ -38,6 +38,30 @@ export class NameUtil {
     return formattedCountries;
   }
 
+  /**
+   * Pretty-printed label for displaying a country.
+   * @param country the input country from data.
+   * @returns formatted Country name.
+   */
+  static getCountryLabel(country: string) {
+    switch(country) {
+      case "Swiss":
+        return "Switzerland";
+      case "Turkey":
+        return "Türkiye";
+      case "East Frisia":
+        return "East Frisia (Northwestern Germany)";
+      case "the Netherlands":
+        return "The Netherlands";
+        case "Great Britain":
+          return "The United Kingdom";
+    }
+    return country;
+  }
+
+  /**
+   * Labelled countries to be displayed in a graph.
+   */
   public static readonly labelledCountries = [
     { value: 'albania', label: 'Albania' },
     { value: 'arabiaPersia', label: 'Arabia / Persia' },
