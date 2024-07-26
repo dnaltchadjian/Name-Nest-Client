@@ -44,13 +44,13 @@ function App() {
   const buildURL = (endPoint : string) => {
     var url = "/api/v1/" + endPoint + "?";
       if (startsWith.current !== "") {
-        url += "&startsWith=" + startsWith.current;
+        url += "&startsWith=" + startsWith.current.trim();
       }
       if (endsWith.current !== "") {
-        url += "&endsWith=" + endsWith.current;
+        url += "&endsWith=" + endsWith.current.trim();
       }
       if (contains.current !== "") {
-        url += "&contains=" + contains.current;
+        url += "&contains=" + contains.current.trim();
       }
       if (gender !== "All") {
         if (gender === "Male") {

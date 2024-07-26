@@ -8,12 +8,17 @@ import {
   Button,
   Card,
   CardBody,
+  CardFooter,
   Grid,
   GridItem,
   Heading,
   HStack,
+  Image,
+  Link,
+  Square,
   Stack,
   StackDivider,
+  Tooltip,
 } from "@chakra-ui/react";
 import { FaStar } from "@react-icons/all-files/fa/FaStar";
 import NameGraph from "./NameGraph";
@@ -49,6 +54,10 @@ function NameList({ nameObjects, nameCount, pageNumber, searchExecuted, setPageN
     setPageNumber(eventPageNumber);
   }
 
+  const getForebearsLink = (nameObject: FirstName) => {
+    return "http://forebears.io/forenames/" + nameObject.name;
+  }
+
   return (
     <>
       <HStack display="inline-block">
@@ -80,9 +89,16 @@ function NameList({ nameObjects, nameCount, pageNumber, searchExecuted, setPageN
                           </Heading>
                         </GridItem>
                         <GridItem colStart={6} colEnd={6} textAlign="right">
-                          <Button rightIcon={<FaStar/>} size="sm" onClick={() => favoriteFunction(nameObject.name)}>
-                            Favorite
-                          </Button>
+                          <HStack>
+                            <Tooltip label='Forebears.io search' fontSize='md'>
+                              <Link href={getForebearsLink(nameObject)} target="#">
+                                <Image src="/forebears-icon-filled-256.webp" boxSize='25px' borderRadius="2px"/>
+                              </Link>
+                            </Tooltip>
+                            <Button rightIcon={<FaStar/>} size="sm" onClick={() => favoriteFunction(nameObject.name)}>
+                              Favorite
+                            </Button>
+                          </HStack>
                         </GridItem>
                       </Grid>
                       <Box>
