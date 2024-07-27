@@ -38,3 +38,9 @@ html, body, #root {
 .chakra-checkbox__control {
     background: white;
 }
+
+
+#palette {
+    align-content: baseline;
+    /* https://coolors.co/333333-666a86-ded8cd-ff7f11-ff1b1c */
+}

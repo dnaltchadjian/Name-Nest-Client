@@ -24,6 +24,8 @@ import { FaStar } from "@react-icons/all-files/fa/FaStar";
 import NameGraph from "./NameGraph";
 import { Pagination } from "@mui/material";
 import { NameUtil } from "../util/NameUtil";
+import { useEffect, useState } from "react";
+import { ColorConstants } from "../util/ColorConstants";
 
 interface Props {
   nameObjects: FirstName[];
@@ -32,11 +34,11 @@ interface Props {
   searchExecuted: boolean;
   setPageNumber: (pageNumber: number) => void;
   pageClickFunction: (pageNumber: number) => void;
-  favoriteFunction: (name: string) => void;
+  buildFavorites: (index: number) => void;
 }
 
-function NameList({ nameObjects, nameCount, pageNumber, searchExecuted, setPageNumber, pageClickFunction, favoriteFunction }: Props) {
-  
+function NameList({ nameObjects, nameCount, pageNumber, searchExecuted, setPageNumber, pageClickFunction, buildFavorites }: Props) {
+
   if (!searchExecuted) {
     return (<></>);
   }
@@ -95,7 +97,8 @@ function NameList({ nameObjects, nameCount, pageNumber, searchExecuted, setPageN
                                 <Image src="/forebears-icon-filled-256.webp" boxSize='25px' borderRadius="2px"/>
                               </Link>
                             </Tooltip>
-                            <Button rightIcon={<FaStar/>} size="sm" onClick={() => favoriteFunction(nameObject.name)}>
+                            <Button rightIcon={<FaStar color={nameObject.favorite ? ColorConstants.GOLD : "#000000"}></FaStar>}
+                            size="sm" onClick={() => {buildFavorites(index)}}>
                               Favorite
                             </Button>
                           </HStack>
@@ -114,6 +117,12 @@ function NameList({ nameObjects, nameCount, pageNumber, searchExecuted, setPageN
       </Accordion>
     </>
   );
+}
+
+const logMap = (map: Map<string, string>) => {
+  map.forEach((value: string, key: string) => {
+    console.log(key);
+  });
 }
 
 export default NameList;

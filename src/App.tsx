@@ -30,7 +30,7 @@ function App() {
   const [countries, setCountries] = useState<string[]>([]);
 
   //functional stuff
-  const [favouriteNames, setFavouriteNames] = useState<Map<string, boolean>>(new Map);
+  const [favoriteNames, setFavoriteNames] = useState<FirstName[]>([]);
   const [searchExecuted, setSearchExecuted] = useState(false);
   const [isSearchDisabled, setIsSearchDisabled] = useState(true);
   const [pageNumber, setPageNumber] = useState(1);
@@ -107,10 +107,6 @@ function App() {
     setSearchExecuted(true);
   }
 
-  const buildFavorites = () => {
-    
-  }
-
   /**
    * Disables the search based on the criteria of the search fields. If all are empty, it's disabled.
    */
@@ -121,13 +117,45 @@ function App() {
   useEffect(() => {
     const favouritesData = window.localStorage.getItem("FAVOURITE_NAMES");
     if (favouritesData !== null) {
-      setFavouriteNames(JSON.parse(favouritesData));
+      //favoriteNames(JSON.parse(favouritesData));
     }
   }, [])
 
-  useEffect(() => {
-    window.localStorage.setItem("FAVOURITE_NAMES", JSON.stringify(favouriteNames));
-  }, [favouriteNames])
+    /**
+   * Recreates the name array with favorites included, creates the new 
+   * @param index 
+   */
+    const buildFavorites = (index: number) => {
+      var nos: FirstName[] = [];
+      nameObjects.forEach(val => nos.push(Object.assign({}, val)));
+      var no = nos[index];
+      no.favorite = !no.favorite;
+      nos[index] = no;
+      setNameObjects(nos);
+
+      var favs: FirstName[] = [];
+      nos.forEach(val => {
+        if (val.favorite) {
+          favs.push(Object.assign({}, val));
+          console.log("found favorite: " + val.name);
+          
+        }
+      });
+      
+      favs.sort((a, b) => {
+        if (a.name.localeCompare(b.name) < 0) {
+          return -1;
+        } else if (a.name.localeCompare(b.name) > 0) {
+          return 1;
+        }
+        return 0;
+      });
+      setFavoriteNames(favs);
+    }
+
+  // useEffect(() => {
+  //   window.localStorage.setItem("FAVOURITE_NAMES", JSON.stringify(favoriteNames));
+  // }, [favoriteNames])
 
   return (
     <>
@@ -144,7 +172,7 @@ function App() {
         <GridItem area="main">
           <Grid templateColumns='repeat(10, 1fr)' alignItems="baseline" padding={0}>
             <GridItem colStart={1} colSpan={1} alignItems="start">
-                <FavouritesDrawer favorites={favouriteNames}></FavouritesDrawer>
+                <FavouritesDrawer favorites={favoriteNames}></FavouritesDrawer>
             </GridItem>
             <GridItem colStart={2} colSpan={8}>
               <h1 className='display-5'>NameNest</h1>
@@ -191,7 +219,7 @@ function App() {
         </Show>
         <GridItem area="main">
           <NameList nameCount={nameCount} nameObjects={nameObjects} searchExecuted={searchExecuted}
-            pageNumber={pageNumber} setPageNumber={setPageNumber} pageClickFunction={getNames} favoriteFunction={buildFavorites}/>
+            pageNumber={pageNumber} setPageNumber={setPageNumber} pageClickFunction={getNames} buildFavorites={buildFavorites}/>
           <br></br>
         </GridItem>
         <Show above="xl">
