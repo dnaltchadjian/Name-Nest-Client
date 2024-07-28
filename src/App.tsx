@@ -111,7 +111,9 @@ function App() {
    * Disables the search based on the criteria of the search fields. If all are empty, it's disabled.
    */
   const isSearchDisabledFunction = () => {
-    setIsSearchDisabled(startsWith.current === "" && endsWith.current === "" && contains.current === "");
+    console.log("countries: " + countries.length);
+    
+    setIsSearchDisabled(startsWith.current === "" && endsWith.current === "" && contains.current === "" && countries.length === 0);
   }
 
   useEffect(() => {
@@ -141,7 +143,7 @@ function App() {
           
         }
       });
-      
+
       favs.sort((a, b) => {
         if (a.name.localeCompare(b.name) < 0) {
           return -1;
@@ -196,7 +198,7 @@ function App() {
             </Box>
             <hr></hr>
             <Box>
-              <CountryDropdown setCountries={setCountries}></CountryDropdown>
+              <CountryDropdown setCountries={setCountries} isSearchDisabledFunction={isSearchDisabledFunction}></CountryDropdown>
             </Box>
           </Stack>
           <br></br>

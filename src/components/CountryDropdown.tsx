@@ -4,9 +4,10 @@ import { NameUtil } from "../util/NameUtil";
 
 interface Props {
     setCountries: (arg0: string[]) => void;
+    isSearchDisabledFunction: () => void;
 }
 
-const CountryDropdown = ({ setCountries }: Props) => {
+const CountryDropdown = ({ setCountries, isSearchDisabledFunction }: Props) => {
 
     const handleChange = (e: MultiValue<{ value: string; label: string; icon: string; } | { value: string; label: string; icon?: undefined; }>, ) => {
         var countriesArray = [];
@@ -29,6 +30,8 @@ const CountryDropdown = ({ setCountries }: Props) => {
                     isSearchable={true}
                     closeMenuOnSelect={false}
                     onChange={(e) => handleChange(e)}
+                    onMenuClose={() => isSearchDisabledFunction()}
+                    onFocus={() => isSearchDisabledFunction()}
                     >
                 </ReactSelect>
             </Box>
