@@ -128,6 +128,7 @@ function App() {
    * @param index 
    */
     const buildFavorites = (index: number) => {
+      //assign the favorite to the name objects
       var nos: FirstName[] = [];
       nameObjects.forEach(val => nos.push(Object.assign({}, val)));
       var no = nos[index];
@@ -135,15 +136,20 @@ function App() {
       nos[index] = no;
       setNameObjects(nos);
 
+      //reconstruct the fav names array
       var favs: FirstName[] = [];
-      nos.forEach(val => {
-        if (val.favorite) {
+      favoriteNames.forEach(val => {
+        if ((val.name === no.name && val.gender === no.gender && !no.favorite)) {
+          //removing a favorite
+        } else {
           favs.push(Object.assign({}, val));
-          console.log("found favorite: " + val.name);
-          
         }
       });
+      if (no.favorite) {
+        favs.push(Object.assign({}, no));
+      }
 
+      //sort the fav names
       favs.sort((a, b) => {
         if (a.name.localeCompare(b.name) < 0) {
           return -1;
