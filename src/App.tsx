@@ -108,12 +108,94 @@ function App() {
   }
 
   /**
-   * Disables the search based on the criteria of the search fields. If all are empty, it's disabled.
+   * Disables the search based on the criteria of the search fields. If all are empty (and there is no country selected), it's disabled.
    */
   const isSearchDisabledFunction = () => {
-    console.log("countries: " + countries.length);
-    
     setIsSearchDisabled(startsWith.current === "" && endsWith.current === "" && contains.current === "" && countries.length === 0);
+  }
+
+  /**
+ * Recreates the name array with favorites included, creates the new name objects array.
+ * @param index the index of the name object to be favorited.
+ */
+  const buildFavorites = (index: number) => {
+    //assign the favorite to the name objects
+    var nos: FirstName[] = [];
+    nameObjects.forEach(val => nos.push(Object.assign({}, val)));
+    var no = nos[index];
+    no.favorite = !no.favorite;
+    nos[index] = no;
+    setNameObjects(nos);
+
+    //reconstruct the fav names array
+    var favs: FirstName[] = [];
+    favoriteNames.forEach(val => {
+      if ((val.name === no.name && val.gender === no.gender && !no.favorite)) {
+        //removing a favorite
+      } else {
+        favs.push(Object.assign({}, val));
+      }
+    });
+    if (no.favorite) {
+      favs.push(Object.assign({}, no));
+    }
+
+    //sort the fav names
+    favs.sort((a, b) => {
+      if (a.name.localeCompare(b.name) < 0) {
+        return -1;
+      } else if (a.name.localeCompare(b.name) > 0) {
+        return 1;
+      }
+      return 0;
+    });
+    setFavoriteNames(favs);
+  }
+
+  /**
+   * Removes a favorite name from the drawer and updates the name objects.
+   * @param providedName the provided name to be removed from favorites.
+   */
+  const removeFavorite = (providedName: FirstName) => {
+    //assign the favorite to the name objects
+    var nos: FirstName[] = [];
+    var foundIndex = -1;
+    nameObjects.forEach((val, index) => {
+      nos.push(Object.assign({}, val))
+      if (providedName.name === val.name && providedName.gender === val.gender) {
+        foundIndex = index;
+      }
+    });
+
+    if (foundIndex > -1) {
+      var no = nos[foundIndex];
+      no.favorite = false;
+      nos[foundIndex] = no;
+      console.log("removing from favs: " + no.name);
+      setNameObjects(nos);
+    }
+    
+
+    //reconstruct the fav names array
+    var favs: FirstName[] = [];
+    favoriteNames.forEach(val => {
+      if ((val.name === providedName.name && val.gender === providedName.gender)) {
+        //removing a favorite
+      } else {
+        favs.push(Object.assign({}, val));
+      }
+    });
+
+    //sort the fav names
+    favs.sort((a, b) => {
+      if (a.name.localeCompare(b.name) < 0) {
+        return -1;
+      } else if (a.name.localeCompare(b.name) > 0) {
+        return 1;
+      }
+      return 0;
+    });
+    setFavoriteNames(favs);
   }
 
   useEffect(() => {
@@ -122,44 +204,6 @@ function App() {
       //favoriteNames(JSON.parse(favouritesData));
     }
   }, [])
-
-    /**
-   * Recreates the name array with favorites included, creates the new 
-   * @param index 
-   */
-    const buildFavorites = (index: number) => {
-      //assign the favorite to the name objects
-      var nos: FirstName[] = [];
-      nameObjects.forEach(val => nos.push(Object.assign({}, val)));
-      var no = nos[index];
-      no.favorite = !no.favorite;
-      nos[index] = no;
-      setNameObjects(nos);
-
-      //reconstruct the fav names array
-      var favs: FirstName[] = [];
-      favoriteNames.forEach(val => {
-        if ((val.name === no.name && val.gender === no.gender && !no.favorite)) {
-          //removing a favorite
-        } else {
-          favs.push(Object.assign({}, val));
-        }
-      });
-      if (no.favorite) {
-        favs.push(Object.assign({}, no));
-      }
-
-      //sort the fav names
-      favs.sort((a, b) => {
-        if (a.name.localeCompare(b.name) < 0) {
-          return -1;
-        } else if (a.name.localeCompare(b.name) > 0) {
-          return 1;
-        }
-        return 0;
-      });
-      setFavoriteNames(favs);
-    }
 
   // useEffect(() => {
   //   window.localStorage.setItem("FAVOURITE_NAMES", JSON.stringify(favoriteNames));
@@ -180,7 +224,7 @@ function App() {
         <GridItem area="main">
           <Grid templateColumns='repeat(10, 1fr)' alignItems="baseline" padding={0}>
             <GridItem colStart={1} colSpan={1} alignItems="start">
-                <FavouritesDrawer favorites={favoriteNames}></FavouritesDrawer>
+                <FavouritesDrawer favorites={favoriteNames} removeFavoriteFunction={removeFavorite}></FavouritesDrawer>
             </GridItem>
             <GridItem colStart={2} colSpan={8}>
               <h1 className='display-5'>NameNest</h1>
