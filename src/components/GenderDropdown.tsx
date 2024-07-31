@@ -1,6 +1,5 @@
-import { Box, FormLabel, Grid, GridItem, HStack, Stack, Text } from "@chakra-ui/react";
+import { Box, FormLabel, Stack } from "@chakra-ui/react";
 import ReactSelect from "react-select";
-import Select from "react-select/dist/declarations/src/Select";
 
 interface Props {
   setValue: (arg0: string) => void;

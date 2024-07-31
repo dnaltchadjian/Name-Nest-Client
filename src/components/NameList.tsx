@@ -8,14 +8,12 @@ import {
   Button,
   Card,
   CardBody,
-  CardFooter,
   Grid,
   GridItem,
   Heading,
   HStack,
   Image,
   Link,
-  Square,
   Stack,
   StackDivider,
   Tooltip,
@@ -24,7 +22,6 @@ import { FaStar } from "@react-icons/all-files/fa/FaStar";
 import NameGraph from "./NameGraph";
 import { Pagination } from "@mui/material";
 import { NameUtil } from "../util/NameUtil";
-import { useEffect, useState } from "react";
 import { ColorConstants } from "../util/ColorConstants";
 
 interface Props {

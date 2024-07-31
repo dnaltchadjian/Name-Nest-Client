@@ -1,5 +1,5 @@
 import { Box, FormLabel, Stack } from "@chakra-ui/react";
-import ReactSelect, { components, MultiValue } from "react-select";
+import ReactSelect, { MultiValue } from "react-select";
 import { NameUtil } from "../util/NameUtil";
 
 interface Props {

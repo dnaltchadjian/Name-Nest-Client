@@ -29,7 +29,7 @@ function App() {
   const [isUnisex, setIsUnisex] = useState(false);
   const [countries, setCountries] = useState<string[]>([]);
 
-  //functional stuff
+  //functional variables for UI control
   const [favoriteNames, setFavoriteNames] = useState<FirstName[]>([]);
   const [searchExecuted, setSearchExecuted] = useState(false);
   const [isSearchDisabled, setIsSearchDisabled] = useState(true);
@@ -198,16 +198,24 @@ function App() {
     setFavoriteNames(favs);
   }
 
+  /**
+   * Hook to pull the favorite names from the user's local storage.
+   */
   useEffect(() => {
     const favouritesData = window.localStorage.getItem("FAVOURITE_NAMES");
-    if (favouritesData !== null) {
-      //favoriteNames(JSON.parse(favouritesData));
+    if (favouritesData === null) {
+      return;
     }
+    var parsedFavs: FirstName[] = JSON.parse(favouritesData);
+    setFavoriteNames(parsedFavs);
   }, [])
 
-  // useEffect(() => {
-  //   window.localStorage.setItem("FAVOURITE_NAMES", JSON.stringify(favoriteNames));
-  // }, [favoriteNames])
+  /**
+   * Hook to push the favorite names to the user's local storage.
+   */
+  useEffect(() => {
+    window.localStorage.setItem("FAVOURITE_NAMES", JSON.stringify(favoriteNames));
+  }, [favoriteNames])
 
   return (
     <>

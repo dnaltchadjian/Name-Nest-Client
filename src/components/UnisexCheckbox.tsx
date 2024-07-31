@@ -1,4 +1,4 @@
-import { Box, Checkbox, HStack, Text } from "@chakra-ui/react";
+import { Box, Checkbox, HStack } from "@chakra-ui/react";
 
 interface Props {
   gender: string;

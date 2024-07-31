@@ -8,11 +8,9 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 const muiTheme = createTheme({});
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  <React.StrictMode>
-    <ThemeProvider theme={muiTheme}>
-      <ChakraProvider>
-        <App />
-      </ChakraProvider>
-    </ThemeProvider>
-  </React.StrictMode>
+  <ThemeProvider theme={muiTheme}>
+    <ChakraProvider>
+      <App />
+    </ChakraProvider>
+  </ThemeProvider>
 );
