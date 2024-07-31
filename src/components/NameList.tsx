@@ -81,7 +81,7 @@ function NameList({ nameObjects, nameCount, pageNumber, searchExecuted, setPageN
                 </AccordionButton>
               </Heading>
               <AccordionPanel pb={4} textAlign="left">
-                <Card backgroundColor="#d1c6b2">
+                <Card backgroundColor={ColorConstants.PALE_OAK_DARK}>
                   <CardBody>
                     <Stack divider={<StackDivider />} spacing='4'>
                       <Grid templateColumns="repeat(6, 1fr)">

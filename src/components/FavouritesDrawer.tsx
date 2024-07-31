@@ -1,4 +1,4 @@
-import { Divider, Drawer, DrawerBody, DrawerContent, DrawerHeader, DrawerOverlay, Heading, HStack, List, ListItem, Spacer, Square, useDisclosure } from "@chakra-ui/react";
+import { Divider, Drawer, DrawerBody, DrawerContent, DrawerHeader, DrawerOverlay, Heading, HStack, List, ListItem, Spacer, Square, Tooltip, useDisclosure } from "@chakra-ui/react";
 import { FaRegTrashAlt } from "@react-icons/all-files/fa/FaRegTrashAlt";
 import { FaStar } from "@react-icons/all-files/fa/FaStar";
 import { ColorConstants } from "../util/ColorConstants";
@@ -47,9 +47,11 @@ const FavouritesDrawer = ({ favorites, removeFavoriteFunction }: Props) => {
                                 <HStack>
                                     <Heading size="sm" alignContent="baseline" paddingTop="2px">{nameObject.name}</Heading>
                                     <Spacer></Spacer>
-                                    <Square cursor="pointer" textAlign="end" onClick={() => removeFavoriteFunction(nameObject)}>
-                                        <FaRegTrashAlt color={ColorConstants.RED}/>
-                                    </Square>
+                                    <Tooltip label={"Remove from favorites"} fontSize='sm'>
+                                        <Square cursor="pointer" textAlign="end" onClick={() => removeFavoriteFunction(nameObject)}>
+                                            <FaRegTrashAlt color={ColorConstants.RED}/>
+                                        </Square>
+                                    </Tooltip>
                                 </HStack>
                                 <Divider></Divider>
                             </>

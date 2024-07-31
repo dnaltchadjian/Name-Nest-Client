@@ -56,11 +56,11 @@ function NameGraph({ nameObject }: Props) {
 
     var graphColor: [string, string];
     if (nameObject.gender.match("M")) {
-        graphColor = ['lightblue', 'blue'];
+        graphColor = ['#89BAAB', '#666a86'];
     } else if (nameObject.gender.match("F")) {
-        graphColor = ['pink', 'purple'];
+        graphColor = ['#BA8A9D', '#74477F'];
     } else {
-        graphColor = ['yellow', 'orange'];
+        graphColor = ['#DDAB6A', '#ff7f11'];
     }
 
     const valueFormatter = (value: number | null) => `${value}%`;
