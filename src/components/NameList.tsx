@@ -23,6 +23,7 @@ import NameGraph from "./NameGraph";
 import { Pagination } from "@mui/material";
 import { NameUtil } from "../util/NameUtil";
 import { ColorConstants } from "../util/ColorConstants";
+import React from "react";
 
 interface Props {
   nameObjects: FirstName[];
@@ -67,8 +68,8 @@ function NameList({ nameObjects, nameCount, pageNumber, searchExecuted, setPageN
       <br></br>
       <Accordion defaultIndex={[]} allowMultiple>
         {nameObjects?.map((nameObject, index) => (
-          <>
-            <AccordionItem key={"" + index}>
+          <React.Fragment key={index.toString()}>
+            <AccordionItem>
               <Heading size="xs">
                 <AccordionButton>
                   <Box as="span" flex="1" textAlign="left">
@@ -109,7 +110,7 @@ function NameList({ nameObjects, nameCount, pageNumber, searchExecuted, setPageN
                 </Card>
               </AccordionPanel>
             </AccordionItem>
-          </>
+          </React.Fragment>
         ))}
       </Accordion>
     </>

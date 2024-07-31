@@ -3,6 +3,7 @@ import { FaRegTrashAlt } from "@react-icons/all-files/fa/FaRegTrashAlt";
 import { FaStar } from "@react-icons/all-files/fa/FaStar";
 import { ColorConstants } from "../util/ColorConstants";
 import { NameUtil } from "../util/NameUtil";
+import React from "react";
 
 interface Props {
     favorites: FirstName[];
@@ -44,7 +45,7 @@ const FavouritesDrawer = ({ favorites, removeFavoriteFunction }: Props) => {
                     <Divider></Divider>
                     <DrawerBody>
                         {favorites?.map((nameObject : FirstName, index) => (
-                            <>
+                            <React.Fragment key={index.toString()}>
                                 <HStack>
                                     <Tooltip label={NameUtil.getGenderFull(nameObject.gender)}>
                                         <Heading size="sm" alignContent="baseline" paddingTop="2px">{nameObject.name}</Heading>
@@ -57,7 +58,7 @@ const FavouritesDrawer = ({ favorites, removeFavoriteFunction }: Props) => {
                                     </Tooltip>
                                 </HStack>
                                 <Divider></Divider>
-                            </>
+                            </React.Fragment>
                         ))}
                     </DrawerBody>
                 </DrawerContent>
