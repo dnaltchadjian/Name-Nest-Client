@@ -8,7 +8,7 @@ interface Props {
 
 const FindButton = ({ children, onClick, isDisabled }: Props) => {
   return (
-    <Button onClick={onClick} children={children} colorScheme="green" isDisabled={isDisabled}>
+    <Button onClick={onClick} children={children} colorScheme="buttonColor" isDisabled={isDisabled}>
     </Button>
   );
 };

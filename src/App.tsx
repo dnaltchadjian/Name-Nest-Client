@@ -199,6 +199,23 @@ function App() {
   }
 
   /**
+   * Removes a favorite name from the drawer and updates the name objects.
+   * @param providedName the provided name to be removed from favorites.
+   */
+  const removeAllFavorites = () => {
+    //assign the favorite to the name objects
+    var nos: FirstName[] = [];
+    nameObjects.forEach((val, index) => {
+      var no = val;
+      no.favorite = false;
+      nos.push(Object.assign({}, val));
+    });
+    
+    setNameObjects(nos);
+    setFavoriteNames([]);
+  }
+
+  /**
    * Hook to pull the favorite names from the user's local storage.
    */
   useEffect(() => {
@@ -232,7 +249,7 @@ function App() {
         <GridItem area="main">
           <Grid templateColumns='repeat(10, 1fr)' alignItems="baseline" padding={0}>
             <GridItem colStart={1} colSpan={1} alignItems="start">
-                <FavouritesDrawer favorites={favoriteNames} removeFavoriteFunction={removeFavorite}></FavouritesDrawer>
+                <FavouritesDrawer favorites={favoriteNames} removeFavoriteFunction={removeFavorite} removeAllFavoritesFunction={removeAllFavorites}></FavouritesDrawer>
             </GridItem>
             <GridItem colStart={2} colSpan={8}>
               <h1 className='display-5'>NameNest</h1>

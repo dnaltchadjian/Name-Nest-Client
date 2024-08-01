@@ -33,19 +33,18 @@ const AboutPopup = () => {
                         often give historical context or other information on the name.
                         <br></br>
                         <br></br>
-                        Huge credit to Matthias Winkelmann for his <b><Link color='green.500' href="https://github.com/MatthiasWinkelmann/firstname-database" target="#">
+                        Huge credit to Matthias Winkelmann for his <b><Link color='buttonColor.500' href="https://github.com/MatthiasWinkelmann/firstname-database" target="#">
                         firstname-database</Link></b> project on Github, which contains all of the names and their associated population data found in this project.
                         <br></br>
                         <br></br>
                         The source code for this project can be found on my Github:
                         <br></br>
                         <b>
-                            <Link color='green.500' href="https://github.com/dnaltchadjian/Name-Nest-API" target="#">Spring Boot Backend API</Link>
+                            <Link color='buttonColor.500' href="https://github.com/dnaltchadjian/Name-Nest-API" target="#">Spring Boot Backend API</Link>
                             <br></br>
-                            <Link color='green.500' href="https://github.com/dnaltchadjian/Name-Nest-Client" target="#">React + Typescript Frontend</Link>
+                            <Link color='buttonColor.500' href="https://github.com/dnaltchadjian/Name-Nest-Client" target="#">React + Typescript Frontend</Link>
                         </b>
                     </ModalBody>
-
                 </ModalContent>
             </Modal>
         </>
