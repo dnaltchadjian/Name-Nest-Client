@@ -9,6 +9,7 @@ import {
   Card,
   CardBody,
   Center,
+  FormLabel,
   Grid,
   GridItem,
   Heading,
@@ -79,20 +80,28 @@ function NameList({ nameObjects, nameCount, pageNumber, pageSize, searchExecuted
   return (
     <>
       <Center>
-        <Heading size="xs">{(pageNumber - 1) * pageSize + 1} - {Math.min((pageNumber * pageSize), nameCount)} of {nameCount} names</Heading>
+        
       </Center>
       <Grid templateColumns='repeat(6, 1fr)'>
         <GridItem colStart={2} colEnd={6}>
-          <Center>
-            <Pagination count={Math.ceil(nameCount / pageSize)}
-              variant="outlined"
-              shape="rounded"
-              siblingCount={0}
-              onChange={(e, page) => handlePageChange(page)}
-              page={pageNumber}></Pagination>
-          </Center>
+          <Stack>
+            <Heading size="xs">
+              {(pageNumber - 1) * pageSize + 1} - {Math.min((pageNumber * pageSize), nameCount)} of {nameCount} names
+            </Heading>
+            <Center>
+              <Pagination count={Math.ceil(nameCount / pageSize)}
+                variant="outlined"
+                shape="rounded"
+                siblingCount={0}
+                onChange={(e, page) => handlePageChange(page)}
+                page={pageNumber}></Pagination>
+              </Center>
+          </Stack>
         </GridItem>
         <GridItem colStart={6} colEnd={6}>
+          <Heading size="xs">
+            Results per page:
+          </Heading>
           <ReactSelect
             options={pageOptions}
             defaultValue={pageOptions[0]}
