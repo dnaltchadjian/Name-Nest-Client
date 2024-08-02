@@ -34,6 +34,7 @@ function App() {
   const [searchExecuted, setSearchExecuted] = useState(false);
   const [isSearchDisabled, setIsSearchDisabled] = useState(true);
   const [pageNumber, setPageNumber] = useState(1);
+  const [pageSize, setPageSize] = useState(10);
 
 
   /**
@@ -88,6 +89,25 @@ function App() {
     try {
       var url = buildURL("namesQuery");
       url += "&pageNumber=" + (funcPageNumber - 1);
+      url += "&pageSize=" + pageSize;
+      console.log("url= " + url);
+      const response = await api.get<FirstName[]>(url);
+      console.log(response.data);
+      setNameObjects(response.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  /**
+   * Gets the full FirstName objects from the API based on the search criteria.
+   * @param funcPageSize the page size of results to display.
+   */
+  const getNamesPageSize = async (funcPageSize : number) => {
+    try {
+      var url = buildURL("namesQuery");
+      url += "&pageNumber=" + (pageNumber - 1);
+      url += "&pageSize=" + funcPageSize;
       console.log("url= " + url);
       const response = await api.get<FirstName[]>(url);
       console.log(response.data);
@@ -236,8 +256,7 @@ function App() {
 
   return (
     <>
-    <Box className="background">
-      <Box height={2}></Box>
+    <Box className="background" padding={4}>
       <Grid templateAreas={{
         base: `"main main main main main main"`,
         md: `"aside main main main main aside2"`,
@@ -296,8 +315,9 @@ function App() {
           <GridItem area="aside2"></GridItem>
         </Show>
         <GridItem area="main">
-          <NameList nameCount={nameCount} nameObjects={nameObjects} searchExecuted={searchExecuted}
-            pageNumber={pageNumber} setPageNumber={setPageNumber} pageClickFunction={getNames} buildFavorites={buildFavorites}/>
+          <NameList nameCount={nameCount} nameObjects={nameObjects} searchExecuted={searchExecuted} pageSize={pageSize}
+            pageNumber={pageNumber} setPageNumber={setPageNumber} setPageSize={setPageSize} pageClickFunction={getNames}
+            pageSizeFunction={getNamesPageSize} buildFavorites={buildFavorites}/>
           <br></br>
         </GridItem>
         <Show above="xl">

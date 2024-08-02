@@ -30,8 +30,8 @@ const chakraTheme = extendTheme ({
   colors: {
     buttonColor: {
       50: "#89BAAB",
-      100: "#558E69",
-      500: "#558E69",
+      100: "#39A55F",
+      500: "#39A55F",
     }
   },
   fonts: {
