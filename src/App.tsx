@@ -4,7 +4,7 @@ import '/node_modules/flag-icons/css/flag-icons.min.css';
 import './App.css';
 import api from './api/axiosConfig';
 import { useEffect, useRef, useState } from 'react';
-import { Box, FormLabel, Grid, GridItem, Show, Stack } from '@chakra-ui/react'
+import { Box, FormLabel, Grid, GridItem, Heading, Show, Stack } from '@chakra-ui/react'
 import FindButton from "./components/FindButton";
 import InputField from './components/InputField';
 import NameList from './components/NameList';
@@ -237,6 +237,7 @@ function App() {
   return (
     <>
     <Box className="background">
+      <Box height={2}></Box>
       <Grid templateAreas={{
         base: `"main main main main main main"`,
         md: `"aside main main main main aside2"`,
@@ -252,7 +253,7 @@ function App() {
                 <FavouritesDrawer favorites={favoriteNames} removeFavoriteFunction={removeFavorite} removeAllFavoritesFunction={removeAllFavorites}></FavouritesDrawer>
             </GridItem>
             <GridItem colStart={2} colSpan={8}>
-              <h1 className='display-5'>NameNest</h1>
+              <Heading size="2xl">NameNest</Heading>
             </GridItem>
             <GridItem colStart={10} alignItems="start">
               <AboutPopup></AboutPopup>

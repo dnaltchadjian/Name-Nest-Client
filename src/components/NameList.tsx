@@ -70,14 +70,14 @@ function NameList({ nameObjects, nameCount, pageNumber, searchExecuted, setPageN
         {nameObjects?.map((nameObject, index) => (
           <React.Fragment key={index.toString()}>
             <AccordionItem>
-              <Heading size="xs">
                 <AccordionButton>
                   <Box as="span" flex="1" textAlign="left">
+                    <Heading size="sm" marginTop="0.5rem">
                     {nameObject.name}
+                    </Heading>
                   </Box>
                   <AccordionIcon />
                 </AccordionButton>
-              </Heading>
               <AccordionPanel pb={4} textAlign="left">
                 <Card backgroundColor={ColorConstants.PALE_OAK_DARK}>
                   <CardBody>

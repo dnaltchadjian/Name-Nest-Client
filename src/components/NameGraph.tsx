@@ -80,6 +80,9 @@ function NameGraph({ nameObject }: Props) {
                     max: maxValue
                 }
             }]}
+            sx={{
+                fontFamily: 'Nunito',
+            }}
             series={[{dataKey: "score", label: "Name frequency (% of the population)", color: graphColor[0], valueFormatter}]}
             layout="horizontal"
             width={500}
