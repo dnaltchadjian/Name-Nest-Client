@@ -59,6 +59,17 @@ const getColorFromGender = (gender: string) => {
     }
 }
 
+const getColorSchemeFromGender = (gender: string) => {
+  switch(gender) {
+    case "M":
+      return "teal";
+    case "F":
+      return "pink";
+    default:
+      return "orange";
+  }
+}
+
 function NameList({ nameObjects, nameCount, pageNumber, pageSize, searchExecuted, setPageNumber, setPageSize, pageClickFunction, pageSizeFunction, buildFavorites }: Props) {
 
   if (!searchExecuted) {
@@ -171,8 +182,8 @@ function NameList({ nameObjects, nameCount, pageNumber, pageSize, searchExecuted
                                   <Image src="/forebears-icon-filled-256.webp" boxSize='25px' borderRadius="2px"/>
                                 </Link>
                               </Tooltip>
-                              <Button rightIcon={<FaStar color={nameObject.favorite ? ColorConstants.GOLD : "#000000"}></FaStar>}
-                              size="sm" onClick={() => {buildFavorites(index)}} backgroundColor={ColorConstants.PALE_OAK}>
+                              <Button rightIcon={<FaStar color={nameObject.favorite ? ColorConstants.GOLD : "#FFFFFF"}></FaStar>}
+                              size="sm" onClick={() => {buildFavorites(index)}} colorScheme={getColorSchemeFromGender(nameObject.gender)}>
                                 Favorite
                               </Button>
                             </HStack>

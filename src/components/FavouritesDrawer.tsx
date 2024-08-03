@@ -19,29 +19,33 @@ const FavouritesDrawer = ({ favorites, removeFavoriteFunction, removeAllFavorite
     if (favorites === null || favorites.length === 0) {
         return (
             <>
-            <Square onClick={onOpen} cursor="pointer" >
-            <FaStar color={ColorConstants.GOLD}/>
-            </Square>
-            <Drawer placement="left" onClose={onClose} isOpen={isOpen}>
-                <DrawerOverlay />
-                <DrawerContent>
-                    <DrawerHeader borderBottomWidth='1px'>
-                        <Heading size="md">Favorite Names</Heading>
-                    </DrawerHeader>
-                    <DrawerBody>
-                        <p>You haven't selected any favorite names yet.</p>
-                    </DrawerBody>
-                </DrawerContent>
-            </Drawer>
+                <Tooltip label={"Favorite names"}>
+                    <Square onClick={onOpen} cursor="pointer">
+                        <FaStar color={ColorConstants.GOLD}/>
+                    </Square>
+                </Tooltip>
+                <Drawer placement="left" onClose={onClose} isOpen={isOpen}>
+                    <DrawerOverlay />
+                    <DrawerContent>
+                        <DrawerHeader borderBottomWidth='1px'>
+                            <Heading size="md">Favorite Names</Heading>
+                        </DrawerHeader>
+                        <DrawerBody>
+                            <p>You haven't selected any favorite names yet.</p>
+                        </DrawerBody>
+                    </DrawerContent>
+                </Drawer>
             </>
         );
     }
 
     return (
         <>
-            <Square onClick={onOpen} cursor="pointer" >
-                <FaStar color={ColorConstants.GOLD}/>
-            </Square>
+            <Tooltip label={"Favorite names"}>
+                <Square onClick={onOpen} cursor="pointer">
+                    <FaStar color={ColorConstants.GOLD}/>
+                </Square>
+            </Tooltip>
             <Drawer placement="left" onClose={onClose} isOpen={isOpen}>
                 <DrawerOverlay />
                 <DrawerContent>
