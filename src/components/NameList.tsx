@@ -9,13 +9,13 @@ import {
   Card,
   CardBody,
   Center,
-  FormLabel,
   Grid,
   GridItem,
   Heading,
   HStack,
   Image,
   Link,
+  Show,
   Spacer,
   Stack,
   StackDivider,
@@ -26,7 +26,7 @@ import NameGraph from "./NameGraph";
 import { Pagination, TablePagination } from "@mui/material";
 import { NameUtil } from "../util/NameUtil";
 import { ColorConstants } from "../util/ColorConstants";
-import React from "react";
+import React, { useState } from "react";
 import ReactSelect from "react-select";
 
 interface Props {
@@ -47,6 +47,17 @@ const pageOptions = [
   { id: '25', value: '25', label: '25' },
   { id: '50', value: '50', label: '50' }
 ]
+
+const getColorFromGender = (gender: string) => {
+    switch(gender) {
+      case "M":
+        return ColorConstants.BOY_BLUE;
+      case "F":
+        return ColorConstants.GIRL_PINK;
+      default:
+        return ColorConstants.UNISEX_ORANGE;
+    }
+}
 
 function NameList({ nameObjects, nameCount, pageNumber, pageSize, searchExecuted, setPageNumber, setPageSize, pageClickFunction, pageSizeFunction, buildFavorites }: Props) {
 
@@ -79,45 +90,57 @@ function NameList({ nameObjects, nameCount, pageNumber, pageSize, searchExecuted
 
   return (
     <>
-      <Center>
-        
-      </Center>
-      <Grid templateColumns='repeat(6, 1fr)'>
-        <GridItem colStart={2} colEnd={6}>
-          <Stack>
-            <Heading size="xs">
-              {(pageNumber - 1) * pageSize + 1} - {Math.min((pageNumber * pageSize), nameCount)} of {nameCount} names
-            </Heading>
-            <Center>
-              <Pagination count={Math.ceil(nameCount / pageSize)}
-                variant="outlined"
-                shape="rounded"
-                siblingCount={0}
-                onChange={(e, page) => handlePageChange(page)}
-                page={pageNumber}></Pagination>
-              </Center>
-          </Stack>
-        </GridItem>
-        <GridItem colStart={6} colEnd={6}>
-          <Heading size="xs">
-            Results per page:
-          </Heading>
-          <ReactSelect
-            options={pageOptions}
-            defaultValue={pageOptions[0]}
-            isSearchable={false}
-            onChange={(e) => (handlePageSizeChange(parseInt(e?.value!)))}>
-            </ReactSelect>
-        </GridItem>
-      </Grid>
-      <br></br>
+      <Box className="background" padding={2}>
+        <Grid templateAreas={{
+          base: `"main main main main main"`,
+          xl: `"aside main main main aside2"`
+        }}
+        templateColumns='repeat(5, 1fr)'>
+          <Show above="xl">
+            <GridItem area="aside"></GridItem>
+          </Show>
+          <GridItem area="main">
+            <Grid templateColumns='repeat(6, 1fr)'>
+              <GridItem colStart={2} colEnd={6}>
+                <Stack>
+                  <Heading size="xs">
+                    {(pageNumber - 1) * pageSize + 1} - {Math.min((pageNumber * pageSize), nameCount)} of {nameCount} names
+                  </Heading>
+                  <Center>
+                    <Pagination count={Math.ceil(nameCount / pageSize)}
+                      variant="outlined"
+                      shape="rounded"
+                      siblingCount={0}
+                      onChange={(e, page) => handlePageChange(page)}
+                      page={pageNumber}></Pagination>
+                    </Center>
+                </Stack>
+              </GridItem>
+              <GridItem colStart={6} colEnd={6}>
+                <Heading size="xs" paddingBottom={1}>
+                  Results per page:
+                </Heading>
+                <ReactSelect
+                  options={pageOptions}
+                  defaultValue={pageOptions[0]}
+                  isSearchable={false}
+                  onChange={(e) => (handlePageSizeChange(parseInt(e?.value!)))}>
+                  </ReactSelect>
+              </GridItem>
+            </Grid>
+          </GridItem>
+          <Show above="xl">
+            <GridItem area="aside2"></GridItem>
+          </Show>
+        </Grid>
+      </Box>
       <br></br>
       <Accordion defaultIndex={[]} allowMultiple>
         {nameObjects?.map((nameObject, index) => (
           <React.Fragment key={index.toString()}>
-            <AccordionItem>
+            <AccordionItem background={getColorFromGender(nameObject.gender)}>
                 <AccordionButton>
-                  <Box as="span" flex="1" textAlign="left">
+                  <Box as="span" flex="1" textAlign="center">
                     <Heading size="sm" marginTop="0.5rem">
                     {nameObject.name}
                     </Heading>
@@ -125,32 +148,48 @@ function NameList({ nameObjects, nameCount, pageNumber, pageSize, searchExecuted
                   <AccordionIcon />
                 </AccordionButton>
               <AccordionPanel pb={4} textAlign="left">
-                <Card backgroundColor={ColorConstants.PALE_OAK_DARK}>
-                  <CardBody>
-                    <Stack divider={<StackDivider />} spacing='4'>
-                      <HStack>
-                        <Heading size='sm' textTransform='uppercase'>
-                          {NameUtil.getGenderFull(nameObject.gender)}
-                        </Heading>
-                        <Spacer></Spacer>
-                        <HStack>
-                          <Tooltip label='Forebears.io search' fontSize='md'>
-                            <Link href={getForebearsLink(nameObject)} target="#">
-                              <Image src="/forebears-icon-filled-256.webp" boxSize='25px' borderRadius="2px"/>
-                            </Link>
-                          </Tooltip>
-                          <Button rightIcon={<FaStar color={nameObject.favorite ? ColorConstants.GOLD : "#000000"}></FaStar>}
-                          size="sm" onClick={() => {buildFavorites(index)}}>
-                            Favorite
-                          </Button>
-                        </HStack>
-                      </HStack>
-                      <Box>
-                        <NameGraph nameObject={nameObject}></NameGraph>
-                      </Box>
-                    </Stack>
-                  </CardBody>
-                </Card>
+                <Grid templateAreas={{
+                  base: `"main main main main main main"`,
+                  lg: `"left main main main main right"`
+                }}
+                templateColumns='repeat(6, 1fr)'>
+                  <Show above="md">
+                    <GridItem area="left"></GridItem>
+                  </Show>
+                  <GridItem area="main">
+                    <Card backgroundColor={ColorConstants.ALABASTER}>
+                      <CardBody>
+                        <Stack divider={<StackDivider />} spacing='4'>
+                          <HStack>
+                            <Heading size='sm' textTransform='uppercase'>
+                              {NameUtil.getGenderFull(nameObject.gender)}
+                            </Heading>
+                            <Spacer></Spacer>
+                            <HStack>
+                              <Tooltip label='Forebears.io search' fontSize='md'>
+                                <Link href={getForebearsLink(nameObject)} target="#">
+                                  <Image src="/forebears-icon-filled-256.webp" boxSize='25px' borderRadius="2px"/>
+                                </Link>
+                              </Tooltip>
+                              <Button rightIcon={<FaStar color={nameObject.favorite ? ColorConstants.GOLD : "#000000"}></FaStar>}
+                              size="sm" onClick={() => {buildFavorites(index)}} backgroundColor={ColorConstants.PALE_OAK}>
+                                Favorite
+                              </Button>
+                            </HStack>
+                          </HStack>
+                          <Box>
+                            <NameGraph nameObject={nameObject}></NameGraph>
+                          </Box>
+                        </Stack>
+                      </CardBody>
+                    </Card>
+                  </GridItem>
+                  <GridItem>
+                    <Show above="md">
+                        <GridItem area="right"></GridItem>
+                    </Show>
+                  </GridItem>
+                </Grid>
               </AccordionPanel>
             </AccordionItem>
           </React.Fragment>
@@ -158,12 +197,6 @@ function NameList({ nameObjects, nameCount, pageNumber, pageSize, searchExecuted
       </Accordion>
     </>
   );
-}
-
-const logMap = (map: Map<string, string>) => {
-  map.forEach((value: string, key: string) => {
-    console.log(key);
-  });
 }
 
 export default NameList;

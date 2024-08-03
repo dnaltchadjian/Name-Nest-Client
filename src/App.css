@@ -15,6 +15,14 @@ html, body, #root {
     text-align: center;
 }
 
+.background2 {
+    background-color: #ECD8D8;
+    width: 100%;
+    height: max-content;
+    min-height: max-content;
+    text-align: center;
+}
+
 .divider-padding {
     margin-top: 0px;
     margin-bottom: 10px;

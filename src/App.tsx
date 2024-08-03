@@ -256,75 +256,58 @@ function App() {
 
   return (
     <>
-    <Box className="background" padding={4}>
-      <Grid templateAreas={{
-        base: `"main main main main main main"`,
-        md: `"aside main main main main aside2"`,
-        lg: `"aside aside main main aside2 aside2"`
-      }}
-      templateColumns='repeat(6, 1fr)'>
-        <Show above="lg">
-          <GridItem area="aside"></GridItem>
-        </Show>
-        <GridItem area="main">
-          <Grid templateColumns='repeat(10, 1fr)' alignItems="baseline" padding={0}>
-            <GridItem colStart={1} colSpan={1} alignItems="start">
-                <FavouritesDrawer favorites={favoriteNames} removeFavoriteFunction={removeFavorite} removeAllFavoritesFunction={removeAllFavorites}></FavouritesDrawer>
-            </GridItem>
-            <GridItem colStart={2} colSpan={8}>
-              <Heading size="2xl">NameNest</Heading>
-            </GridItem>
-            <GridItem colStart={10} alignItems="start">
-              <AboutPopup></AboutPopup>
-            </GridItem>
-          </Grid>
-          <hr className="divider-padding"></hr>
-          <FormLabel display="inline-block">The perfect name for your baby waits here!</FormLabel>
-          <Stack spacing={4}>
-            <InputField name="Starts With" fieldValue={startsWith} isSearchDisabledFunction={isSearchDisabledFunction}></InputField>
-            <InputField name="Ends With" fieldValue={endsWith} isSearchDisabledFunction={isSearchDisabledFunction}></InputField>
-            <InputField name="Contains" fieldValue={contains} isSearchDisabledFunction={isSearchDisabledFunction}></InputField>
-          </Stack>
-          <hr></hr>
-          <Stack>
-            <Box>
-              <GenderDropdown setValue={setGender}></GenderDropdown>
-              <UnisexCheckbox gender={gender} isUnisex={isUnisex} setValue={setIsUnisex}></UnisexCheckbox>
-            </Box>
+      <Box className="background" padding={4}>
+        <Grid templateAreas={{
+          base: `"main main main main main main"`,
+          md: `"aside main main main main aside2"`,
+          lg: `"aside aside main main aside2 aside2"`
+        }}
+        templateColumns='repeat(6, 1fr)'>
+          <Show above="lg">
+            <GridItem area="aside"></GridItem>
+          </Show>
+          <GridItem area="main">
+            <Grid templateColumns='repeat(10, 1fr)' alignItems="baseline" padding={0}>
+              <GridItem colStart={1} colSpan={1} alignItems="start">
+                  <FavouritesDrawer favorites={favoriteNames} removeFavoriteFunction={removeFavorite} removeAllFavoritesFunction={removeAllFavorites}></FavouritesDrawer>
+              </GridItem>
+              <GridItem colStart={2} colSpan={8}>
+                <Heading size="2xl">NameNest</Heading>
+              </GridItem>
+              <GridItem colStart={10} alignItems="start">
+                <AboutPopup></AboutPopup>
+              </GridItem>
+            </Grid>
+            <hr className="divider-padding"></hr>
+            <FormLabel display="inline-block">The perfect name for your baby waits here!</FormLabel>
+            <Stack spacing={4}>
+              <InputField name="Starts With" fieldValue={startsWith} isSearchDisabledFunction={isSearchDisabledFunction}></InputField>
+              <InputField name="Ends With" fieldValue={endsWith} isSearchDisabledFunction={isSearchDisabledFunction}></InputField>
+              <InputField name="Contains" fieldValue={contains} isSearchDisabledFunction={isSearchDisabledFunction}></InputField>
+            </Stack>
             <hr></hr>
-            <Box>
-              <CountryDropdown setCountries={setCountries} isSearchDisabledFunction={isSearchDisabledFunction}></CountryDropdown>
-            </Box>
-          </Stack>
-          <br></br>
-          <FindButton onClick={() => getNameCountAndFirstNamePage()} isDisabled={isSearchDisabled}>Find Names</FindButton>
-          <br></br>
-          <br></br>
-        </GridItem>
-        <Show above="lg">
-          <GridItem area="aside2"></GridItem>
-        </Show>
-      </Grid>
-      {/* second grid for displaying the names all pretty. */}
-      <Grid templateAreas={{
-        base: `"main main main main main"`,
-        xl: `"aside main main main aside2"`
-      }}
-      templateColumns='repeat(5, 1fr)'>
-        <Show above="xl">
-          <GridItem area="aside2"></GridItem>
-        </Show>
-        <GridItem area="main">
-          <NameList nameCount={nameCount} nameObjects={nameObjects} searchExecuted={searchExecuted} pageSize={pageSize}
-            pageNumber={pageNumber} setPageNumber={setPageNumber} setPageSize={setPageSize} pageClickFunction={getNames}
-            pageSizeFunction={getNamesPageSize} buildFavorites={buildFavorites}/>
-          <br></br>
-        </GridItem>
-        <Show above="xl">
-          <GridItem area="aside2"></GridItem>
-        </Show>
-      </Grid>
-    </Box>
+            <Stack>
+              <Box>
+                <GenderDropdown setValue={setGender}></GenderDropdown>
+                <UnisexCheckbox gender={gender} isUnisex={isUnisex} setValue={setIsUnisex}></UnisexCheckbox>
+              </Box>
+              <hr></hr>
+              <Box>
+                <CountryDropdown setCountries={setCountries} isSearchDisabledFunction={isSearchDisabledFunction}></CountryDropdown>
+              </Box>
+            </Stack>
+            <br></br>
+            <FindButton onClick={() => getNameCountAndFirstNamePage()} isDisabled={isSearchDisabled}>Find Names</FindButton>
+            <br></br>
+          </GridItem>
+          <Show above="lg">
+            <GridItem area="aside2"></GridItem>
+          </Show>
+        </Grid>
+      </Box>
+      <NameList nameCount={nameCount} nameObjects={nameObjects} searchExecuted={searchExecuted} pageSize={pageSize}
+        pageNumber={pageNumber} setPageNumber={setPageNumber} setPageSize={setPageSize} pageClickFunction={getNames}
+        pageSizeFunction={getNamesPageSize} buildFavorites={buildFavorites}/>
     </>
   );
 }

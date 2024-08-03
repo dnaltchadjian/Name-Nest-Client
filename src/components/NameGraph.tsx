@@ -83,9 +83,12 @@ function NameGraph({ nameObject }: Props) {
             sx={{
                 fontFamily: 'Nunito',
             }}
+            margin={{
+                left: 150
+            }}
             series={[{dataKey: "score", label: "Name frequency (% of the population)", color: graphColor[0], valueFormatter}]}
             layout="horizontal"
-            width={500}
+            width={700}
             height={height}
         />
         </HStack>
