@@ -79,7 +79,9 @@ function NameList({ nameObjects, nameCount, pageNumber, pageSize, searchExecuted
   if (nameObjects === null || nameObjects.length === 0) {
     return (
       <>
-        <Heading size="sm">No names could be found with this criteria.</Heading>
+        <Box className="background">
+          <Heading size="sm">No names could be found with this criteria.</Heading>
+        </Box>
       </>
     );
   }
@@ -135,8 +137,7 @@ function NameList({ nameObjects, nameCount, pageNumber, pageSize, searchExecuted
                   options={pageOptions}
                   defaultValue={pageOptions[0]}
                   isSearchable={false}
-                  onChange={(e) => (handlePageSizeChange(parseInt(e?.value!)))}>
-                  </ReactSelect>
+                  onChange={(e) => (handlePageSizeChange(parseInt(e?.value!)))} />
               </GridItem>
             </Grid>
           </GridItem>

@@ -1,6 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
-import '/node_modules/flag-icons/css/flag-icons.min.css';
 import './App.css';
 import api from './api/axiosConfig';
 import { useEffect, useRef, useState } from 'react';
@@ -297,7 +296,7 @@ function App() {
               </Box>
             </Stack>
             <br></br>
-            <FindButton onClick={() => getNameCountAndFirstNamePage()} isDisabled={isSearchDisabled}>Find Names</FindButton>
+            <FindButton onClick={() => getNameCountAndFirstNamePage()} isDisabled={isSearchDisabled} />
             <br></br>
           </GridItem>
           <Show above="lg">

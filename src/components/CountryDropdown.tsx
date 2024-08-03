@@ -32,9 +32,8 @@ const CountryDropdown = ({ setCountries, isSearchDisabledFunction }: Props) => {
                     onChange={(e) => handleChange(e)}
                     onMenuClose={() => isSearchDisabledFunction()}
                     onFocus={() => isSearchDisabledFunction()}
-                    >
-                </ReactSelect>
-            </Box>
+                    />
+                </Box>
           </Stack>
         </>
     );
