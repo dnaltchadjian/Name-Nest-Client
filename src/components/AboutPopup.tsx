@@ -1,4 +1,4 @@
-import { Link, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Square, Tooltip, useDisclosure } from "@chakra-ui/react";
+import { HStack, Link, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Spacer, Square, Tooltip, useDisclosure } from "@chakra-ui/react";
 import { FaInfo } from "@react-icons/all-files/fa/FaInfo";
 import { ColorConstants } from "../util/ColorConstants";
 
@@ -8,18 +8,21 @@ const AboutPopup = () => {
 
     return (
         <>
-            <Tooltip label={"About this site"}>
-                <Square cursor="pointer" onClick={onOpen}>
-                    <FaInfo/>
-                </Square>
-            </Tooltip>
+            <HStack>
+                <Spacer></Spacer>
+                <Tooltip label={"About this site"}>
+                    <Square cursor="pointer" onClick={onOpen} size="32px">
+                        <FaInfo size="24px"/>
+                    </Square>
+                </Tooltip>
+            </HStack>
             <Modal closeOnOverlayClick={false} isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay />
                 <ModalContent>
                     <ModalHeader>Thanks for checking out NameNest!</ModalHeader>
                     <ModalCloseButton />
-                    <ModalBody fontSize={12} pb={6}>
-                        This tool was born from frustration of looking through what felt like infinite websites; all containing the same names.
+                    <ModalBody fontSize={16} pb={6}>
+                        I hope this simple tool helps you find a name for your little one.
                         <br></br>
                         <br></br>
                         The <b>"Starts With"</b> and <b>"Ends With"</b> fields are searches for the start and end of a name,

@@ -257,11 +257,12 @@ function App() {
     <>
       <Box className="background" padding={4}>
         <Grid templateAreas={{
-          base: `"main main main main main main"`,
-          md: `"aside main main main main aside2"`,
-          lg: `"aside aside main main aside2 aside2"`
+          base: `"main main main main main main main main"`,
+          md: `"aside main main main main main main aside2"`,
+          lg: `"aside main main main main main main aside2"`,
+          xl: `"aside aside main main main main aside2 aside2"`
         }}
-        templateColumns='repeat(6, 1fr)'>
+        templateColumns='repeat(8, 1fr)'>
           <Show above="lg">
             <GridItem area="aside"></GridItem>
           </Show>
@@ -271,7 +272,7 @@ function App() {
                   <FavouritesDrawer favorites={favoriteNames} removeFavoriteFunction={removeFavorite} removeAllFavoritesFunction={removeAllFavorites}></FavouritesDrawer>
               </GridItem>
               <GridItem colStart={2} colSpan={8}>
-                <Heading size="2xl">NameNest</Heading>
+                <Heading size="3xl">NameNest</Heading>
               </GridItem>
               <GridItem colStart={10} alignItems="start">
                 <AboutPopup></AboutPopup>

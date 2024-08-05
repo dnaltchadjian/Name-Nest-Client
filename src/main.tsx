@@ -80,6 +80,11 @@ const chakraTheme = extendTheme ({
   fonts: {
     heading: `'Nunito', sans-serif`,
     body: `'Nunito', sans-serif`,
+  },
+  fontSizes: {
+    sm: "1.2rem",
+    md: "1.4rem",
+    lg: "1.5rem"
   }
 });
 

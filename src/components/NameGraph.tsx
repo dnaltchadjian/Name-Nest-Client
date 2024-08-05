@@ -82,6 +82,8 @@ function NameGraph({ nameObject }: Props) {
             }]}
             sx={{
                 fontFamily: 'Nunito',
+                "& .MuiChartsLegend-series text": { fontSize: "1.4em !important" },
+                "& .MuiChartsAxis-tickLabel tspan": { fontSize: "1.3em" }
             }}
             margin={{
                 left: 150

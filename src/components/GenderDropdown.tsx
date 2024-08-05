@@ -21,6 +21,15 @@ const GenderDropdown = ({ setValue }: Props) => {
           </Box>
           <Box>
           <ReactSelect
+            styles={{
+              control: (base) => ({ ...base,
+                fontSize: "20px"
+              }),
+              menuList: (base) => ({
+                ...base,
+                fontSize: '20px',
+              }),
+            }}
             options={genderOptions}
             defaultValue={genderOptions[0]}
             isSearchable={false}

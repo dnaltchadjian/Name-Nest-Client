@@ -121,6 +121,7 @@ function NameList({ nameObjects, nameCount, pageNumber, pageSize, searchExecuted
                   </Heading>
                   <Center>
                     <Pagination count={Math.ceil(nameCount / pageSize)}
+                      size="large"
                       variant="outlined"
                       shape="rounded"
                       siblingCount={0}
@@ -134,6 +135,15 @@ function NameList({ nameObjects, nameCount, pageNumber, pageSize, searchExecuted
                   Results per page:
                 </Heading>
                 <ReactSelect
+                  styles={{
+                    control: (base) => ({ ...base,
+                      fontSize: "20px"
+                    }),
+                    menuList: (base) => ({
+                      ...base,
+                      fontSize: '20px',
+                    }),
+                  }}
                   options={pageOptions}
                   defaultValue={pageOptions[0]}
                   isSearchable={false}
@@ -178,9 +188,9 @@ function NameList({ nameObjects, nameCount, pageNumber, pageSize, searchExecuted
                             </Heading>
                             <Spacer></Spacer>
                             <HStack>
-                              <Tooltip label='Forebears.io search' fontSize='md'>
+                              <Tooltip label='Forebears.io search' fontSize='sm'>
                                 <Link href={getForebearsLink(nameObject)} target="#">
-                                  <Image src="/forebears-icon-filled-256.webp" boxSize='25px' borderRadius="2px"/>
+                                  <Image src="/forebears-icon-filled-256.webp" boxSize='32px' borderRadius="2px"/>
                                 </Link>
                               </Tooltip>
                               <Button rightIcon={<FaStar color={nameObject.favorite ? ColorConstants.GOLD : "#FFFFFF"}></FaStar>}

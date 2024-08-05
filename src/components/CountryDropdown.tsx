@@ -32,6 +32,15 @@ const CountryDropdown = ({ setCountries, isSearchDisabledFunction }: Props) => {
                     onChange={(e) => handleChange(e)}
                     onMenuClose={() => isSearchDisabledFunction()}
                     onFocus={() => isSearchDisabledFunction()}
+                    styles={{
+                        control: (base) => ({ ...base,
+                          fontSize: "20px"
+                        }),
+                        menuList: (base) => ({
+                            ...base,
+                            fontSize: '20px',
+                        }),
+                    }}
                     />
                 </Box>
           </Stack>

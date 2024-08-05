@@ -20,15 +20,15 @@ const FavouritesDrawer = ({ favorites, removeFavoriteFunction, removeAllFavorite
         return (
             <>
                 <Tooltip label={"Favorite names"}>
-                    <Square onClick={onOpen} cursor="pointer">
-                        <FaStar color={ColorConstants.GOLD}/>
+                    <Square onClick={onOpen} cursor="pointer" size="32px">
+                        <FaStar color={ColorConstants.GOLD} size="24px"/>
                     </Square>
                 </Tooltip>
                 <Drawer placement="left" onClose={onClose} isOpen={isOpen}>
                     <DrawerOverlay />
                     <DrawerContent>
                         <DrawerHeader borderBottomWidth='1px'>
-                            <Heading size="md">Favorite Names</Heading>
+                            <Heading size="lg">Favorite Names</Heading>
                         </DrawerHeader>
                         <DrawerBody>
                             <p>You haven't selected any favorite names yet.</p>
@@ -42,20 +42,23 @@ const FavouritesDrawer = ({ favorites, removeFavoriteFunction, removeAllFavorite
     return (
         <>
             <Tooltip label={"Favorite names"}>
-                <Square onClick={onOpen} cursor="pointer">
-                    <FaStar color={ColorConstants.GOLD}/>
+                <Square onClick={onOpen} cursor="pointer" size="32px">
+                    <FaStar color={ColorConstants.GOLD} size="24px"/>
                 </Square>
             </Tooltip>
             <Drawer placement="left" onClose={onClose} isOpen={isOpen}>
                 <DrawerOverlay />
                 <DrawerContent>
-                    <DrawerHeader paddingBottom="inherit">
+                    <DrawerHeader paddingBottom="0">
                         <HStack>
-                            <Heading size="md">Favorite Names</Heading>
+                            <Heading size="lg">Favorite Names</Heading>
                             <Spacer></Spacer>
                             <Tooltip label={"Remove all favorites"} fontSize="sm">
-                                <Square cursor="pointer" textAlign="end" onClick={() => removeAllFavoritesFunction()}>
-                                    <FaRegTrashAlt color={ColorConstants.RED}/>
+                                <Square cursor="pointer" textAlign="end" onClick={() => removeAllFavoritesFunction()}  
+                                sx={{
+                                    paddingBottom: "7px"
+                                }}>
+                                    <FaRegTrashAlt color={ColorConstants.RED} size="24px"/>
                                 </Square>
                             </Tooltip>
                         </HStack>

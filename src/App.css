@@ -51,16 +51,6 @@ html, body, #root {
     background: white;
 }
 
-/* MUI changes */
-
-/* .MuiChartsAxis-tickContainer, .MuiChartsAxis-tickLabel, .MuiChartsAxis-root {
-    font-family: "Open Sans", sans-serif;
-}
-
-tspan {
-    font-family: "Open Sans", sans-serif;
-} */
-
 /* Color palette */
 #palette {
     align-content: baseline;
