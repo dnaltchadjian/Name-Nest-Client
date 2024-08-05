@@ -22,7 +22,7 @@ const AboutPopup = () => {
                     <ModalHeader>Thanks for checking out NameNest!</ModalHeader>
                     <ModalCloseButton />
                     <ModalBody fontSize={16} pb={6}>
-                        I hope this simple tool helps you find a name for your little one.
+                        I hope this simple tool helps you find a fitting name for your little one!
                         <br></br>
                         <br></br>
                         The <b>"Starts With"</b> and <b>"Ends With"</b> fields are searches for the start and end of a name,
