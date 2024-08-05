@@ -193,7 +193,7 @@ function NameList({ nameObjects, nameCount, pageNumber, pageSize, searchExecuted
                                   <Image src="/forebears-icon-filled-256.webp" boxSize='32px' borderRadius="2px"/>
                                 </Link>
                               </Tooltip>
-                              <Button rightIcon={<FaStar color={nameObject.favorite ? ColorConstants.GOLD : "#FFFFFF"}></FaStar>}
+                              <Button rightIcon={<FaStar color={nameObject.favorite ? ColorConstants.GOLD : "#FFFFFF"} size="18px"></FaStar>}
                               size="sm" onClick={() => {buildFavorites(index)}} colorScheme={getColorSchemeFromGender(nameObject.gender)}>
                                 Favorite
                               </Button>

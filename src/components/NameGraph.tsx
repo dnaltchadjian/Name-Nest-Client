@@ -42,9 +42,9 @@ function NameGraph({ nameObject }: Props) {
     if (!drawGraph) {
         return (
             <>
-            <HStack width="fit-content">
-                <Text> This name is typically found in {soloCountry}, with a distribution of about {soloScore}% of the population.</Text>
-            </HStack>
+                <HStack width="fit-content">
+                    <Text fontSize="sm"> This name is typically found in {soloCountry}, with a distribution of about {soloScore}% of the population.</Text>
+                </HStack>
             </>
         );
     }
@@ -67,33 +67,33 @@ function NameGraph({ nameObject }: Props) {
 
     return (
         <>
-        <HStack>
-        <BarChart dataset={dataset}
-            yAxis={[{
-                scaleType: "band", dataKey: "country",
-            }]}
-            xAxis={[{
-                colorMap: {
-                    type: 'continuous',
-                    color: graphColor,
-                    min: minValue,
-                    max: maxValue
-                }
-            }]}
-            sx={{
-                fontFamily: 'Nunito',
-                "& .MuiChartsLegend-series text": { fontSize: "1.4em !important" },
-                "& .MuiChartsAxis-tickLabel tspan": { fontSize: "1.3em" }
-            }}
-            margin={{
-                left: 150
-            }}
-            series={[{dataKey: "score", label: "Name frequency (% of the population)", color: graphColor[0], valueFormatter}]}
-            layout="horizontal"
-            width={700}
-            height={height}
-        />
-        </HStack>
+            <HStack>
+                <BarChart dataset={dataset}
+                    yAxis={[{
+                        scaleType: "band", dataKey: "country",
+                    }]}
+                    xAxis={[{
+                        colorMap: {
+                            type: 'continuous',
+                            color: graphColor,
+                            min: minValue,
+                            max: maxValue
+                        }
+                    }]}
+                    sx={{
+                        fontFamily: 'Nunito',
+                        "& .MuiChartsLegend-series text": { fontSize: "1.4em !important" },
+                        "& .MuiChartsAxis-tickLabel tspan": { fontSize: "1.3em" }
+                    }}
+                    margin={{
+                        left: 150
+                    }}
+                    series={[{dataKey: "score", label: "Name frequency (% of the population)", color: graphColor[0], valueFormatter}]}
+                    layout="horizontal"
+                    width={700}
+                    height={height}
+                />
+            </HStack>
         </>
     );
 }
