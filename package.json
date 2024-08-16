@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "start": "vite --host"
+    "start": "nohup vite --host &"
   },
   "dependencies": {
     "@chakra-ui/react": "^2.8.2",

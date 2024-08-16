@@ -1,0 +1,8 @@
+unzip namer-app.zip -d client
+cd client
+chmod 755 /home/ec2-user/client/node_modules/.bin/vite
+
+cd src/api
+vi axiosConfig.tsx
+
+baseURL: 'https://name-nest.com:8080'
