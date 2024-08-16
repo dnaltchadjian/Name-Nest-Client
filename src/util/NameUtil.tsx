@@ -88,7 +88,7 @@ export class NameUtil {
       case "Denmark":
         return "DNK";
       case "East Frisia":
-        return "(EF) GER";
+        return "ESF";
       case "Estonia":
         return "EST";
       case "Finland":
@@ -140,7 +140,7 @@ export class NameUtil {
       case "Norway":
         return "NOR";
       case "other countries":
-        return "other";
+        return "OTH";
       case "Poland":
         return "POL";
       case "Portugal":
@@ -191,7 +191,7 @@ export class NameUtil {
     { value: 'croatia', label: 'Croatia (HRV)' },
     { value: 'czech', label: 'Czechia (CZE)' },
     { value: 'denmark', label: 'Denmark (DNK)' },
-    { value: 'eastFrisia', label: 'East Frisia (NW) Germany ((EF) GER)' },
+    { value: 'eastFrisia', label: 'East Frisia (NW) Germany (ESF)' },
     { value: 'estonia', label: 'Estonia (EST)' },
     { value: 'finland', label: 'Finland (FIN)' },
     { value: 'france', label: 'France (FRA)' },
@@ -232,7 +232,7 @@ export class NameUtil {
     { value: 'greatBritain', label: 'United Kingdom (GBR)' },
     { value: 'usa', label: 'U.S.A. (USA)' },
     { value: 'vietnam', label: 'Vietnam (VNM)' },
-    { value: 'otherCountries', label: 'Other Countries (other)' }
+    { value: 'otherCountries', label: 'Other Countries (OTH)' }
   ]
 
 }
