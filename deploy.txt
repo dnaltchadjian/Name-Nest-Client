@@ -1,8 +1,11 @@
-unzip namer-app.zip -d client
-cd client
-chmod 755 /home/ec2-user/client/node_modules/.bin/vite
+1. unzip namer-app.zip -d client
+2. cd client
+3. chmod 755 /home/ec2-user/client/node_modules/.bin/vite
 
-cd src/api
-vi axiosConfig.tsx
+4. cd src/api
+5. vi axiosConfig.tsx
 
-baseURL: 'https://name-nest.com:8080'
+6. edit:
+    baseURL: 'https://name-nest.com:8080'
+
+7. nohup java -jar name-hunter-0.0.1-SNAPSHOT.jar &
