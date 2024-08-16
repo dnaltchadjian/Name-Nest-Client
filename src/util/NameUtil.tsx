@@ -50,11 +50,127 @@ export class NameUtil {
       case "Turkey":
         return "Türkiye";
       case "East Frisia":
-        return "East Frisia (Northwestern Germany)";
+        return "East Frisia (NW Germany)";
       case "the Netherlands":
         return "The Netherlands";
-        case "Great Britain":
-          return "The United Kingdom";
+      case "Great Britain":
+        return "The United Kingdom";
+      case "Kazakhstan/Uzbekistan,etc.":
+        return "Kazakhstan / Uzbekistan";
+    }
+    return country;
+  }
+
+  static getCountryAbbr(country: string) {
+    switch(country) {
+      case "Albania":
+        return "ALB";
+      case "Arabia/Persia":
+        return "ARB";
+      case "Armenia":
+        return "ARM";
+      case "Azerbaijan":
+        return "AZE";
+      case "Austria":
+        return "AUT";
+      case "Belarus":
+        return "BLR";
+      case "Bosnia and Herzegovina":
+        return "BIH";
+      case "Bulgaria":
+        return "BGR";
+      case "China":
+        return "CHN";
+      case "Croatia":
+        return "HRV";
+      case "Czech Republic":
+        return "CZE";
+      case "Denmark":
+        return "DNK";
+      case "East Frisia":
+        return "(EF) GER";
+      case "Estonia":
+        return "EST";
+      case "Finland":
+        return "FIN";
+      case "France":
+        return "FRA";
+      case "Georgia":
+        return "GEO";
+      case "Great Britain":
+        return "GBR";
+      case "Greece":
+        return "GRC";
+      case "Germany":
+        return "DEU";
+      case "Hungary":
+        return "HUN";
+      case "Iceland":
+      return "ISL";
+      case "India/Sri Lanka":
+        return "IND";
+      case "Ireland":
+        return "IRL";
+      case "Israel":
+        return "ISR";
+      case "Italy":
+        return "ITA";
+      case "Japan":
+        return "JPN";
+      case "Kazakhstan/Uzbekistan,etc":
+        return "KAZ";
+      case "Korea":
+        return "KOR";
+      case "Kosovo":
+        return "KOS";
+      case "Latvia":
+        return "LVA";
+      case "Lithuania":
+        return "LTU";
+      case "Luxembourg":
+        return "LUX";
+      case "Macedonia":
+        return "MKD";
+      case "Malta":
+        return "MLT";
+      case "Moldova":
+        return "MDA";
+      case "Montenegro":
+        return "MNE";
+      case "Norway":
+        return "NOR";
+      case "other countries":
+        return "other";
+      case "Poland":
+        return "POL";
+      case "Portugal":
+        return "PRT";
+      case "Romania":
+        return "ROU";
+      case "Russia":
+        return "RUS";
+      case "Serbia":
+        return "SRB";
+      case "Slovakia":
+        return "SVK";
+      case "Slovenia":
+        return "SVN";
+      case "Spain":
+        return "ESP";
+      case "Sweden":
+        return "SWE";
+      case "Swiss":
+        return "CHE";
+      case "the Netherlands":
+        return "NLD";
+      case "Turkey":
+        return "TUR";
+      case "Ukraine":
+        return "UKR";
+      case "USA":
+        return "USA";
+      case "Vietnam":
+        return "VNM";
     }
     return country;
   }
@@ -63,19 +179,19 @@ export class NameUtil {
    * Labelled countries to be displayed in a graph.
    */
   public static readonly labelledCountries = [
-    { value: 'albania', label: 'Albania' },
-    { value: 'arabiaPersia', label: 'Arabia / Persia' },
-    { value: 'armenia', label: 'Armenia' },
-    { value: 'austria', label: 'Austria' },
-    { value: 'azerbaijan', label: 'Azerbaijan' },
-    { value: 'belarus', label: 'Belarus' },
+    { value: 'albania', label: 'Albania (ALB)' },
+    { value: 'arabiaPersia', label: 'Arabia / Persia (ARB)' },
+    { value: 'armenia', label: 'Armenia (ARM)' },
+    { value: 'austria', label: 'Austria (AUT)' },
+    { value: 'azerbaijan', label: 'Azerbaijan (AZE)' },
+    { value: 'belarus', label: 'Belarus (BLR)' },
     { value: 'bosniaAndHerzegovina', label: 'Bosnia and Herzegovina' },
     { value: 'bulgaria', label: 'Bulgaria' },
     { value: 'china', label: 'China' },
     { value: 'croatia', label: 'Croatia' },
     { value: 'czech', label: 'Czechia' },
     { value: 'denmark', label: 'Denmark' },
-    { value: 'eastFrisia', label: 'East Frisia (Northwestern Germany)' },
+    { value: 'eastFrisia', label: 'East Frisia (NW) Germany)' },
     { value: 'estonia', label: 'Estonia' },
     { value: 'finland', label: 'Finland' },
     { value: 'france', label: 'France' },

@@ -19,6 +19,7 @@ import {
   Spacer,
   Stack,
   StackDivider,
+  Text,
   Tooltip,
 } from "@chakra-ui/react";
 import { FaStar } from "@react-icons/all-files/fa/FaStar";
@@ -121,7 +122,7 @@ function NameList({ nameObjects, nameCount, pageNumber, pageSize, searchExecuted
                   </Heading>
                   <Center>
                     <Pagination count={Math.ceil(nameCount / pageSize)}
-                      size="large"
+                      size="small"
                       variant="outlined"
                       shape="rounded"
                       siblingCount={0}
@@ -131,17 +132,26 @@ function NameList({ nameObjects, nameCount, pageNumber, pageSize, searchExecuted
                 </Stack>
               </GridItem>
               <GridItem colStart={6} colEnd={6}>
-                <Heading size="xs" paddingBottom={1}>
-                  Results per page:
-                </Heading>
-                <ReactSelect
+                <Text paddingBottom={0} className="react-select-size">
+                  Rows per page:
+                </Text>
+                <ReactSelect className="react-select-size"
                   styles={{
                     control: (base) => ({ ...base,
-                      fontSize: "20px"
+                      fontSize: "inherit",
+                      maxHeight: "15px"
                     }),
                     menuList: (base) => ({
                       ...base,
-                      fontSize: '20px',
+                      fontSize: '18px',
+                    }),
+                    dropdownIndicator: (base) => ({
+                      ...base,
+                      padding: 0,
+                    }),
+                    indicatorSeparator: (provided) => ({
+                      ...provided,
+                      maxWidth: '10px',
                     }),
                   }}
                   options={pageOptions}
@@ -156,7 +166,7 @@ function NameList({ nameObjects, nameCount, pageNumber, pageSize, searchExecuted
           </Show>
         </Grid>
       </Box>
-      <br></br>
+      
       <Accordion defaultIndex={[]} allowMultiple>
         {nameObjects?.map((nameObject, index) => (
           <React.Fragment key={index.toString()}>
@@ -179,7 +189,7 @@ function NameList({ nameObjects, nameCount, pageNumber, pageSize, searchExecuted
                     <GridItem area="left"></GridItem>
                   </Show>
                   <GridItem area="main">
-                    <Card backgroundColor={ColorConstants.ALABASTER}>
+                    <Card backgroundColor={ColorConstants.ALABASTER} display="flex">
                       <CardBody>
                         <Stack divider={<StackDivider />} spacing='4'>
                           <HStack>
@@ -199,9 +209,7 @@ function NameList({ nameObjects, nameCount, pageNumber, pageSize, searchExecuted
                               </Button>
                             </HStack>
                           </HStack>
-                          <Box>
-                            <NameGraph nameObject={nameObject}></NameGraph>
-                          </Box>
+                          <NameGraph nameObject={nameObject}></NameGraph>
                         </Stack>
                       </CardBody>
                     </Card>

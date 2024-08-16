@@ -17,7 +17,7 @@ const InputField = ({ name, fieldValue, isSearchDisabledFunction }: Props) => {
   return (
     <>
       <InputGroup>
-        <InputLeftAddon>{name}</InputLeftAddon>
+        <InputLeftAddon fontSize="sm">{name}</InputLeftAddon>
         <Input onChange={(e) => handleChange(e)} backgroundColor="white"/>
       </InputGroup>
     </>

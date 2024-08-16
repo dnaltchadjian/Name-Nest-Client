@@ -51,6 +51,20 @@ html, body, #root {
     background: white;
 }
 
+.chakra-form__label {
+    font-size: 1.2rem !important;
+}
+
+.react-select-size {
+    font-size: 1.0rem;
+}
+
+@media (max-width: 800px) {
+    .react-select-size {
+        font-size: 0.8rem;
+    }
+}
+
 /* Color palette */
 #palette {
     align-content: baseline;

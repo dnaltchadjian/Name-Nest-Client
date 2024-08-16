@@ -32,7 +32,7 @@ function App() {
   const [favoriteNames, setFavoriteNames] = useState<FirstName[]>([]);
   const [searchExecuted, setSearchExecuted] = useState(false);
   const [isSearchDisabled, setIsSearchDisabled] = useState(true);
-  const [pageNumber, setPageNumber] = useState(1);
+  const [pageNumber, setPageNumber] = useState(0);
   const [pageSize, setPageSize] = useState(10);
 
 

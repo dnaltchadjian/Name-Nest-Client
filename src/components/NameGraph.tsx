@@ -1,4 +1,4 @@
-import { HStack, Text } from "@chakra-ui/react";
+import { HStack, Show, Text } from "@chakra-ui/react";
 import { BarChart } from "@mui/x-charts";
 import { NameUtil } from "../util/NameUtil";
 
@@ -22,7 +22,7 @@ function NameGraph({ nameObject }: Props) {
      */
     for (const [country, score] of Object.entries(nameObject.countryMap)) {
         const powScore =  Math.pow(2, score);
-        dataset[index] = {country: country, score: powScore};
+        dataset[index] = {country: NameUtil.getCountryLabel(country), countryAbbr: NameUtil.getCountryAbbr(country), score: powScore};
         if (powScore < minValue) {
             minValue = powScore;
         }
@@ -49,9 +49,9 @@ function NameGraph({ nameObject }: Props) {
         );
     }
 
-    var height = 200;
-    if (dataset.length * 30 > height) {
-        height = dataset.length * 30;
+    var width = 800;
+    if (dataset.length * 30 > width) {
+        width = dataset.length * 30;
     }
 
     var graphColor: [string, string];
@@ -67,33 +67,80 @@ function NameGraph({ nameObject }: Props) {
 
     return (
         <>
-            <HStack>
+            <Show above="sm">
+                <HStack>
+                    <BarChart dataset={dataset}
+                        xAxis={[{
+                            scaleType: "band", dataKey: "country",
+                            tickLabelStyle: {
+                                angle: -45,
+                                textAnchor: 'end',
+                                fontSize: 14,
+                            },
+                        }]}
+                        yAxis={[{
+                            colorMap: {
+                                type: 'continuous',
+                                color: graphColor,
+                                min: minValue,
+                                max: maxValue
+                            },
+                            
+                        }]}
+                        sx={{
+                            fontFamily: 'Nunito',
+                            "& .MuiChartsLegend-series text": { fontSize: "1.4em !important" },
+                            "& .MuiChartsAxis-tickLabel tspan": { fontSize: "1.3em" }
+                        }}
+                        margin={{
+                            left: 100,
+                            right: 0,
+                            bottom: 180
+                        }}
+                        
+                        series={[{dataKey: "score", label: "Name frequency (% of the population)", color: graphColor[0], valueFormatter}]}
+                        width={width}
+                        height={400}
+                    />
+                </HStack>
+            </Show>
+            <Show below="sm">
+                <HStack>
                 <BarChart dataset={dataset}
-                    yAxis={[{
-                        scaleType: "band", dataKey: "country",
-                    }]}
                     xAxis={[{
+                        scaleType: "band", dataKey: "countryAbbr",
+                        tickLabelStyle: {
+                            angle: -45,
+                            textAnchor: 'end',
+                            fontSize: 12,
+                        },
+                    }]}
+                    yAxis={[{
                         colorMap: {
                             type: 'continuous',
                             color: graphColor,
                             min: minValue,
                             max: maxValue
-                        }
+                        },
                     }]}
                     sx={{
                         fontFamily: 'Nunito',
-                        "& .MuiChartsLegend-series text": { fontSize: "1.4em !important" },
+                        "& .MuiChartsLegend-series text": { fontSize: "1.4em !important", padding: 0 },
                         "& .MuiChartsAxis-tickLabel tspan": { fontSize: "1.3em" }
                     }}
                     margin={{
-                        left: 150
+                        left: 40,
+                        right: 0,
+                        bottom: 50,
+                        top: 50
                     }}
-                    series={[{dataKey: "score", label: "Name frequency (% of the population)", color: graphColor[0], valueFormatter}]}
-                    layout="horizontal"
-                    width={700}
-                    height={height}
+                    
+                    series={[{dataKey: "score", label: "Frequency (%)", color: graphColor[0], valueFormatter}]}
+                    width={300}
+                    height={300}
                 />
-            </HStack>
+                </HStack>
+            </Show>
         </>
     );
 }
