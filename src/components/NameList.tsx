@@ -24,10 +24,10 @@ import {
 } from "@chakra-ui/react";
 import { FaStar } from "@react-icons/all-files/fa/FaStar";
 import NameGraph from "./NameGraph";
-import { Pagination, TablePagination } from "@mui/material";
+import { Pagination } from "@mui/material";
 import { NameUtil } from "../util/NameUtil";
 import { ColorConstants } from "../util/ColorConstants";
-import React, { useState } from "react";
+import React from "react";
 import ReactSelect from "react-select";
 
 interface Props {
@@ -95,6 +95,8 @@ function NameList({ nameObjects, nameCount, pageNumber, pageSize, searchExecuted
   const handlePageSizeChange = (eventPageSize: number) => {
     pageSizeFunction(eventPageSize);
     setPageSize(eventPageSize);
+    setPageNumber(1);
+    
   }
 
 
@@ -157,7 +159,7 @@ function NameList({ nameObjects, nameCount, pageNumber, pageSize, searchExecuted
                   options={pageOptions}
                   defaultValue={pageOptions[0]}
                   isSearchable={false}
-                  onChange={(e) => (handlePageSizeChange(parseInt(e?.value!)))} />
+                  onChange={(e) => {handlePageSizeChange(parseInt(e?.value!))}} />
               </GridItem>
             </Grid>
           </GridItem>

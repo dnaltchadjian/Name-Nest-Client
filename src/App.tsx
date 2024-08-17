@@ -105,7 +105,7 @@ function App() {
   const getNamesPageSize = async (funcPageSize : number) => {
     try {
       var url = buildURL("namesQuery");
-      url += "&pageNumber=" + (pageNumber - 1);
+      url += "&pageNumber=0";
       url += "&pageSize=" + funcPageSize;
       console.log("url= " + url);
       const response = await api.get<FirstName[]>(url);
